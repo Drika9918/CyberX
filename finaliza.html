@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Compra - Grande CYBERX</title>
+     <link rel="shortcut icon" href="imagem/icon da logo.png"
+    type="image/x-icon">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400..900&display=swap');
+        body {
+            font-family: 'tektur';
+            background-color: #000000;
+            padding: 20px;
+            color:  white;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #5e02026e;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #740202;
+            padding-bottom: 10px;
+        }
+        h1 img{
+            width: 12rem;
+            height: 20px;
+        }
+
+        h2 {
+            color: #ffffff;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .resumo-compra {
+            border: 1px solid #3a0000;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            background-color: #130000;
+        }
+
+        #lista-itens-carrinho {
+            list-style: none;
+            padding: 0;
+        }
+
+        #lista-itens-carrinho li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #700000;
+            color: #9e9e9e;
+        }
+
+        .total {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-top: 10px;
+            color: #fff2f2;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 17px;
+            color: #ffffff;
+            background-color: #75000081;
+            border: 1px solid #ffffff;
+            border-radius: 7px;
+            box-sizing: border-box;
+        }
+
+        .confirmacao-mensagem {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border: 1px solid #ffeeba;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .btn-concluir {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #ffffff; /* Cor verde para botão de ação */
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-concluir:hover {
+            background-color: #028602;
+        }
+
+        .agradecimento {
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+  
+    <div class="container">
+          
+        <h1>Finalizar Compra <a href="index.html" class="logo-link">
+             <img src="https://i.ibb.co/JRsyhy5W/icon-da-logo.png" alt="CyberX Logo" style="height: 100px; position: absolute; left: 20px; top: 25px;">
+        </a></h1>
+          
+        <div class="resumo-compra">
+            <h2>Seu Pedido</h2>
+            <ul id="lista-itens-carrinho">
+                </ul>
+            <p class="total">Total: <span id="valor-total">R$ 0,00</span></p>
+        </div>
+        
+        <form id="form-checkout">
+            <h2>Detalhes da Finalização</h2>
+
+            <div class="form-group">
+                <label for="tipo-pagamento">Tipo de Pagamento:</label>
+                <select id="tipo-pagamento" name="tipo-pagamento" required>
+                    <option value="">Selecione...</option>
+                    <option value="Pix">Pix</option>
+                    <option value="CartaoCredito">Cartão de Crédito</option>
+                    <option value="Boleto">Boleto</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="whatsapp">Seu WhatsApp (com DDD):</label>
+                <input type="text" id="whatsapp" name="whatsapp" placeholder="Ex: 5511987654321 (apenas números)" required pattern="[0-9]{10,15}" title="Use o formato: código do país + DDD + número (ex: 5511987654321)">
+            </div>
+
+            <div class="confirmacao-mensagem">
+                <p>⚠️ **Confirmação:** Você tem certeza que deseja concluir a compra?</p>
+            </div>
+
+            <button type="submit" class="btn-concluir">Concluir Compra</button>
+        </form>
+
+        <p class="agradecimento" id="agradecimento-msg" style="display:none;">
+            ✅ Pedido em processamento! Verifique seu WhatsApp para a mensagem de agradecimento.
+        </p>
+    </div>
+
+    <script src="js/carrinho.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. CARREGA E EXIBE O CARRINHO
+            // Usamos a função loadCart() do seu arquivo carrinho.js para pegar os dados
+            loadCart(); 
+            const cartItems = JSON.parse(localStorage.getItem('cyberxCart') || '[]');
+            const listaItens = document.getElementById('lista-itens-carrinho');
+            const totalElement = document.getElementById('valor-total');
+            let textoResumoCarrinho = ""; // Variável para armazenar o texto que irá para o WhatsApp
+
+            // Preenche a lista de itens e monta o resumo para o WhatsApp
+            if (cartItems.length === 0) {
+                listaItens.innerHTML = '<li>Seu carrinho está vazio.</li>';
+                textoResumoCarrinho = "O carrinho está vazio.";
+            } else {
+                listaItens.innerHTML = '';
+                cartItems.forEach(item => {
+                    const precoTotalItem = item.price * item.quantity;
+                    const li = document.createElement('li');
+                    li.textContent = `${item.quantity}x ${item.name} (${item.marca}) - ${formatCurrency(precoTotalItem)}`;
+                    listaItens.appendChild(li);
+                    
+                    // Adiciona o item formatado à variável do WhatsApp (usando | para separar)
+                    textoResumoCarrinho += `${item.quantity}x ${item.name} - ${formatCurrency(precoTotalItem)}|`;
+                });
+            }
+
+            // Exibe o total formatado na tela
+            const totalCompra = calculateTotal();
+            totalElement.textContent = formatCurrency(totalCompra);
+            
+            // 2. LÓGICA DO FORMULÁRIO (WHATSAPP)
+            document.getElementById('form-checkout').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                // Coleta dados
+                const whatsapp = document.getElementById('whatsapp').value;
+                const tipoPagamento = document.getElementById('tipo-pagamento').value;
+                const totalFinal = totalElement.textContent;
+                
+                // Formatação do resumo do carrinho para o WhatsApp (substitui | por %0A, quebra de linha)
+                const resumoItensFormatado = textoResumoCarrinho.replace(/\|/g, '%0A- ');
+
+                // Constrói a Mensagem de Agradecimento que o Cliente Verá
+                let mensagem = `*Grande CYBERX:* Nossa equipe fica agradecida pela confiança!%0A%0A`;
+                mensagem += `*SEU PEDIDO:*%0A`;
+                mensagem += `- ${resumoItensFormatado}%0A`; // Itens do carrinho
+                mensagem += `*TOTAL:* ${totalFinal}%0A%0A`;
+                
+                mensagem += `*Seus Detalhes:*%0A`;
+                mensagem += `- Pagamento Escolhido: ${tipoPagamento}%0A`;
+                mensagem += `- *Seu Número de Contato:* ${whatsapp}%0A%0A`; 
+                mensagem += `Em instantes, um de nossos atendentes entrará em contato com você *neste número* para confirmar e finalizar a sua compra.`;
+
+                // Cria o link de redirecionamento para o WhatsApp do *CLIENTE*
+                const mensagemCodificada = encodeURIComponent(mensagem);
+                const urlWhatsApp = `https://wa.me/${whatsapp}?text=${mensagemCodificada}`;
+
+                // Abre o link no WhatsApp
+                window.open(urlWhatsApp, '_blank');
+                
+                // Opcional: Mostra uma mensagem de sucesso na tela
+                document.getElementById('form-checkout').style.display = 'none';
+                document.getElementById('agradecimento-msg').style.display = 'block';
+            });
+        });
+        
+        // As funções loadCart(), calculateTotal() e formatCurrency() são definidas em carrinho.js
+        // A função formatCurrency é replicada aqui para garantir que funcione se a outra não carregar
+        function formatCurrency(value) {
+            if (typeof value !== 'number') return 'R$ 0,00';
+            return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+    </script>
+</body>
+</html>

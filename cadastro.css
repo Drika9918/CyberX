@@ -1,0 +1,651 @@
+   @import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400..900&display=swap');
+#backgroud {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+}
+
+#backgroud video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-size: cover;
+    position: fixed;
+}
+
+#backgroud::after {
+    content: '';
+
+    width: inherit;
+    height: inherit;
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(109deg, rgba(10, 12, 16, 0.99) 15%, rgba(10, 12, 16, 0.3) 59%, rgba(10, 12, 16, 0.99) 105%);
+
+
+}
+
+/* ============================================
+   NOVA PALETA DE CORES BASEADA NA IMAGEM
+============================================ */
+:root {
+    /* 🎨 PALETA DE CORES PRIMÁRIA */
+    --color-bg-deep: #0A0A0A;
+    --color-bg-card: #0F0F0F;
+    --color-bg-input: #1A1A1A;
+    
+    /* Tons de Vermelho/Bordô */
+    --color-red-dark: #1A0000;
+    --color-red-bordeaux: #5A0000;
+    --color-red-wine: #8B0000;
+    --color-red-accent: #FF2A2A;
+    --color-red-vignette: rgba(139, 0, 0, 0.2);
+    
+    /* Cinzas */
+    --color-gray-darker: #121212;
+    --color-gray-dark: #2A2A2A;
+    --color-gray-medium: #333333;
+    --color-gray-light: #555555;
+    --color-gray-text: #888888;
+    
+    /* Brancos */
+    --color-white: #FFFFFF;
+    --color-white-off: #F0F0F0;
+    --color-white-dim: #AAAAAA;
+    
+    /* Azul para links */
+    --color-blue-link: #4A90E2;
+    
+    /* 📐 MEDIDAS E ESPAÇAMENTOS */
+    --border-radius-pill: 50px;
+    --border-radius-large: 16px;
+    --border-radius-medium: 12px;
+    --border-radius-small: 8px;
+    
+    --card-width: 480px;
+    --input-height: 56px;
+    
+    --spacing-xl: 3.5rem;
+    --spacing-lg: 2.5rem;
+    --spacing-md: 1.75rem;
+    --spacing-sm: 1rem;
+    --spacing-xs: 0.5rem;
+    
+    /* 🎭 EFEITOS VISUAIS */
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.5);
+    --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.6);
+    --shadow-input: 0 2px 10px rgba(0, 0, 0, 0.3);
+    --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   RESET E FUNDO COM IMAGEM MONTANHOSA
+============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+ font-family: 'tektur', sans-serif;
+    background: 
+        /* Camada 1: Vinheta vermelha nas bordas */
+        radial-gradient(
+            ellipse at 80% 50%,
+            transparent 30%,
+            var(--color-red-vignette) 70%,
+            rgba(10, 0, 0, 0.9) 100%
+        ),
+        /* Camada 2: Gradiente escuro com tons bordô */
+        linear-gradient(
+            135deg,
+            var(--color-red-dark) 0%,
+            var(--color-bg-deep) 30%,
+            var(--color-bg-deep) 70%,
+            #1A0000 100%
+        ),
+        /* Camada 3: Imagem de fundo montanhosa */
+        url('./image_654dcc.jpg') no-repeat center right / 50% auto;
+    color: var(--color-white);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Linha pontilhada decorativa (efeito da imagem) */
+body::before {
+    content: '';
+    position: fixed;
+    top: 50%;
+    right: 25%;
+    width: 200px;
+    height: 200px;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: translateY(-50%);
+    opacity: 0.3;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* ============================================
+   LAYOUT PRINCIPAL
+============================================ */
+.minimal-auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 10%;
+    position: relative;
+    z-index: 2;
+}
+
+/* Container centralizado verticalmente */
+.center-container {
+    width: 100%;
+    max-width: var(--card-width);
+    position: relative;
+    z-index: 3;
+    animation: fadeInLeft 0.8s ease-out;
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ============================================
+   CARTÃO PRINCIPAL
+============================================ */
+.minimal-card {
+    width: 100%;
+    background: transparent;
+    padding: 0;
+    position: relative;
+}
+
+/* ============================================
+   CABEÇALHO - TEXTO
+============================================ */
+.card-header {
+    text-align: left;
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Texto "START FOR FREE" */
+.start-text {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-white);
+    letter-spacing: 3px;
+    margin-bottom: var(--spacing-sm);
+    text-transform: uppercase;
+    opacity: 0.9;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Título principal "Create sew acconnt." */
+.minimal-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--color-white-off);
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+    margin-bottom: var(--spacing-xs);
+    position: relative;
+    display: inline-block;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+ font-family: 'tektur', sans-serif;
+}
+
+/* Ponto final vermelho */
+.red-dot {
+    color: var(--color-red-accent);
+    position: relative;
+    animation: subtleGlow 2s ease-in-out infinite;
+}
+
+@keyframes subtleGlow {
+    0%, 100% { 
+        text-shadow: 0 0 10px var(--color-red-accent);
+    }
+    50% { 
+        text-shadow: 0 0 20px var(--color-red-accent), 
+                     0 0 30px rgba(255, 42, 42, 0.3);
+    }
+}
+
+/* Subtexto "Já és membro? Faça Log In" */
+.login-link {
+    font-size: 1.05rem;
+    color: var(--color-gray-text);
+    font-weight: 400;
+    margin-top: var(--spacing-xs);
+    letter-spacing: 0.2px;
+}
+
+/* Link "Log In" em azul */
+.link-blue {
+    color: var(--color-blue-link);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition-smooth);
+    position: relative;
+    padding: 0 2px;
+}
+
+.link-blue:hover {
+    color: #6BB5FF;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+}
+
+/* ============================================
+   FORMULÁRIO - INPUTS
+============================================ */
+.minimal-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.form-field {
+    position: relative;
+}
+
+.input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Estilo dos inputs */
+.minimal-input {
+    width: 100%;
+    height: var(--input-height);
+    padding: 0 var(--spacing-lg) 0 var(--spacing-md);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius-medium);
+    color: var(--color-white-off);
+    font-size: 1rem;
+    font-weight: 400;
+    outline: none;
+    transition: var(--transition-smooth);
+    box-shadow: var(--shadow-input);
+ font-family: 'tektur', sans-serif;
+}
+
+/* Placeholder */
+.minimal-input::placeholder {
+    color: var(--color-gray-text);
+    font-weight: 300;
+    opacity: 0.8;
+}
+
+/* Input com texto preenchido (como o email na imagem) */
+.minimal-input.filled {
+    color: var(--color-white-off);
+    font-weight: 400;
+}
+
+/* Foco nos inputs */
+.minimal-input:focus {
+    border-color: rgba(255, 255, 255, 0.15);
+    background: #222222;
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transform: translateY(-1px);
+}
+.form-field input:focus ~ .minimal-icon-right {
+  color: var(--color-red-wine) !important;
+  transform: translateY(-50%) scale(1.1) !important;
+}
+/* Ícones à direita dos inputs */
+.minimal-icon-right {
+    position: absolute;
+    right: var(--spacing-md);
+    color: var(--color-gray-text);
+    font-size: 1.1rem;
+    pointer-events: none;
+    opacity: 0.7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Botão de mostrar/ocultar senha */
+.toggle-password {
+    position: absolute;
+    right: var(--spacing-sm);
+    background: transparent;
+    border: none;
+    color: var(--color-gray-text);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+    transition: var(--transition-smooth);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.toggle-password:hover {
+    color: var(--color-white);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* ============================================
+   BOTÕES - Layout exato da imagem
+============================================ */
+.minimal-buttons-container {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr; /* Proporção exata da imagem */
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-lg);
+    width: 100%;
+}
+
+/* Estilo base para ambos os botões */
+.btn-change-method,
+.btn-primary {
+    height: 50px;
+    border: none;
+    border-radius: var(--border-radius-pill);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    transition: var(--transition-smooth);
+ font-family: 'tektur', sans-serif;
+    letter-spacing: 0.3px;
+}
+
+/* Botão "Change method" (cinza escuro) */
+.btn-change-method {
+    background: var(--color-gray-dark);
+    color: var(--color-white-off);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn-change-method:hover {
+    background: #333333;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Botão "Cadastrar" (vermelho bordô) */
+.btn-primary {
+    background: linear-gradient(135deg, var(--color-red-bordeaux), var(--color-red-wine));
+    color: var(--color-white);
+    box-shadow: 
+        0 4px 15px rgba(90, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--color-red-wine), #9B0000);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 6px 20px rgba(139, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Efeito de brilho no hover do botão vermelho */
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transition: left 0.7s ease;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+/* Efeito de clique nos botões */
+.btn-primary:active,
+.btn-change-method:active {
+    transform: translateY(0);
+    transition: transform 0.1s ease;
+}
+/* ============================================
+   ESTILOS PARA MENSAGENS DE FEEDBACK
+============================================ */
+
+.premium-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    padding: 16px 24px;
+    border-radius: var(--border-radius-medium);
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    z-index: 9999;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow-medium);
+}
+
+.premium-message.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Tipos de mensagem */
+.premium-message.success {
+    background: linear-gradient(135deg, rgba(6, 214, 160, 0.15), rgba(6, 214, 160, 0.05));
+    color: #06d6a0;
+    border-color: rgba(6, 214, 160, 0.3);
+}
+
+.premium-message.error {
+    background: linear-gradient(135deg, rgba(239, 71, 111, 0.15), rgba(239, 71, 111, 0.05));
+    color: #ef476f;
+    border-color: rgba(239, 71, 111, 0.3);
+}
+
+.premium-message.warning {
+    background: linear-gradient(135deg, rgba(255, 209, 102, 0.15), rgba(255, 209, 102, 0.05));
+    color: #ffd166;
+    border-color: rgba(255, 209, 102, 0.3);
+}
+
+.premium-message.info {
+    background: linear-gradient(135deg, rgba(67, 97, 238, 0.15), rgba(67, 97, 238, 0.05));
+    color: #4361ee;
+    border-color: rgba(67, 97, 238, 0.3);
+}
+
+/* Ícones nas mensagens */
+.premium-message::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.premium-message.success::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2306d6a0'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+}
+
+.premium-message.error::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ef476f'%3E%3Cpath d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/%3E%3C/svg%3E");
+}
+
+/* Responsividade para mensagens */
+@media (max-width: 768px) {
+    .premium-message {
+        width: 95%;
+        max-width: none;
+        padding: 14px 20px;
+        font-size: 13px;
+    }
+}
+/* ============================================
+   RESPONSIVIDADE
+============================================ */
+
+/* Telas médias - ajusta posição da imagem de fundo */
+@media (max-width: 1200px) {
+    .minimal-auth-page {
+        padding-left: 5%;
+    }
+    
+    body {
+        background-size: 60% auto;
+    }
+    
+    body::before {
+        right: 15%;
+    }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .minimal-auth-page {
+        padding: var(--spacing-lg);
+        justify-content: center;
+        background: 
+            radial-gradient(
+                ellipse at 50% 50%,
+                transparent 30%,
+                var(--color-red-vignette) 70%,
+                rgba(10, 0, 0, 0.9) 100%
+            ),
+            linear-gradient(
+                135deg,
+                var(--color-red-dark) 0%,
+                var(--color-bg-deep) 100%
+            );
+    }
+    
+    body::before {
+        display: none;
+    }
+    
+    .center-container {
+        max-width: 100%;
+    }
+    
+    .minimal-title {
+        font-size: 2.8rem;
+    }
+    
+    .minimal-buttons-container {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xs);
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .minimal-auth-page {
+        padding: var(--spacing-md);
+    }
+    
+    .minimal-title {
+        font-size: 2.2rem;
+    }
+    
+    .start-text {
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+    }
+    
+    .login-link {
+        font-size: 0.95rem;
+    }
+    
+    .minimal-input {
+        height: 52px;
+        font-size: 0.95rem;
+    }
+    
+    .btn-change-method,
+    .btn-primary {
+        height: 48px;
+        font-size: 0.95rem;
+    }
+    
+    .minimal-buttons-container {
+        gap: var(--spacing-xs);
+    }
+}
+
+/* ============================================
+   EFEITOS ADICIONAIS DE DESIGN
+============================================ */
+
+/* Sombra suave nos inputs ao hover */
+.input-container:hover .minimal-input {
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Foco acessível */
+.minimal-input:focus-visible,
+.btn-primary:focus-visible,
+.btn-change-method:focus-visible {
+    outline: 2px solid var(--color-red-accent);
+    outline-offset: 2px;
+}
+
+/* Animações sutis */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.minimal-form {
+    animation: fadeIn 0.5s ease-out 0.2s both;
+}

@@ -1,0 +1,367 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberX</title>
+  <link rel="shortcut icon" href="imagem/icon da logo.png" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <!-- Fontes do Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400&family=Manrope:wght@400&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+  var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+  (function () {
+    var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+    s1.async = true;
+    s1.src = 'https://embed.tawk.to/68e41e4c385fee1952fe63e5/1j6thcmn5';
+    s1.charset = 'UTF-8';
+    s1.setAttribute('crossorigin', '*');
+    s0.parentNode.insertBefore(s1, s0);
+  })();
+</script>
+<!--End of Tawk.to Script-->
+
+<body class="light-theme">
+  <canvas id="binaryCanvas" class="binary-canvas" aria-hidden="true"></canvas>
+  <header class="header">
+    <div class="navbar">
+      <div class="logo">
+        <a href="index.html" class="logo__img">
+          <img src="https://i.ibb.co/JRsyhy5W/icon-da-logo.png" alt="">
+        </a>
+      </div>
+      
+    <!-- MENU LATERAL -->
+    <div class="sidebar" id="sidebar">
+      <button class="close-btn" id="close-btn"><i class="ri-close-line"></i></button>
+      <ul class="sidebar-links">
+        <li><a href="index.html">Hardwares</a></li>
+        <li><a href="portifolio.html">Periféricos</a></li>
+        <li><a href="sobre.html">Computadores</a></li>
+        <li><a href="notebook.html">Cadeiras</a></li>
+        <li><a href="Contato.html">Monitores</a></li>
+        <li><a href="celulares.html">Celulares</a></li>
+      </ul>
+    </div>
+
+    <!-- FUNDO ESCURO QUANDO MENU ABRE -->
+    <div class="overlay" id="overlay"></div>
+   
+    <!-- BARRA DE PESQUISA -->
+    <div class="search-container">
+      <form action="#" id="search-form" autocomplete="off">
+        <input type="text" id="search-input" placeholder="O que deseja encontrar?" />
+        <button type="submit" id="search-button"><i class="ri-search-line"></i></button>
+      </form>
+
+    </div>
+    <!-- CARINHO -->
+    <a href="carrinho.html" class="carrinho-link" target="_blank">
+      <i class="fa-solid fa-cart-shopping"></i>
+
+      <span id="carrinho-contador" class="carrinho-badge">0</span>
+    </a>
+    <div id="toast-confirmacao" class="toast-mensagem">
+      Item adicionado! Você escolheu um equipamento <strong> de elite</strong>.
+    </div>
+
+    <!-- MINHA CONTA -->
+    <div class="header-user-area">
+      <span id="welcome-message"></span>
+      <div class="user-menu-dropdown">
+        <a href="#" class="user-icon-link" aria-expanded="false" aria-controls="user-suggestions">
+          <i class="ri-user-line"></i>
+        </a>
+
+        <ul class="dropdown-content" id="user-suggestions">
+          <li><a href="login.html">Minha Conta</a></li>
+          <li><a href="cadastro.html">Cadastro</a></li>
+          <li><a href="adm.html">Administrador</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- BOTÃO HAMBÚRGUER -->
+    <div class="menu-toggle" id="menu-toggle">
+      <i class="ri-menu-line"></i>
+    </div>
+
+  </header>
+
+  <main>
+    <!-- Swiper -->
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"> <img src="https://redragon.es/content/uploads/2024/07/king-1k-black-1.jpg" alt="">
+        </div>
+        <div class="swiper-slide"><img src="https://redragon.es/content/uploads/2024/07/king-1k-black-1.jpg" alt="">
+        </div>
+        <div class="swiper-slide"><img src="https://redragon.es/content/uploads/2024/07/king-1k-black-1.jpg" alt="">
+        </div>
+
+
+      </div>
+
+      <div class="swiper-pagination"></div>
+    </div>
+    <!-- FIM SWIPER -->
+
+    <!-- ADICIONAR PRODUTO https://dlcdnwebimgs.asus.com/gain/ae9c5236-9d7c-4933-9991-201309d8a110/w800 -->
+
+    <br><br><br><br>
+  </main>
+  <section class="featured-products container-carrinho" id="featured-products">
+    <h2 class="rainbow-text">Produtos em Destaque</h2>
+    <div class="products-grid">
+
+      <div class="product-card" data-id="P001" data-name="Mouse Gamer CyberX V1" data-price="129.90"
+        data-image="caminho/para/imagem1.png">
+        <img src="https://i.ibb.co/S4PZc861/image.png" alt="Mouse Gamer CyberX V1">
+        <div class="product-info">
+          <h3>Mouse Gamer CyberX V1</h3>
+          <p class="product-price">R$ 129,90</p>
+          <button class="btn-adicionar-carrinho"
+            onclick="addItemToCart('P001', 'Mouse Gamer CyberX V1', 129.90, 'caminho/para/imagem1.png')">
+            <i class="ri-shopping-cart-2-line"></i> Adicionar
+          </button>
+        </div>
+      </div>
+
+      <div class="product-card" data-id="P002" data-name="Teclado Mecânico RGB T900" data-price="399.99"
+        data-image="caminho/para/imagem2.png">
+        <img src="https://i.ibb.co/0y19sKdp/image.png" alt="Teclado Mecânico RGB T900">
+        <div class="product-info">
+          <h3>Teclado Mecânico RGB T900</h3>
+          <p class="product-price">R$ 399,99</p>
+          <button class="btn-adicionar-carrinho"
+            onclick="addItemToCart('P002', 'Teclado Mecânico RGB T900', 399.99, 'caminho/para/imagem2.png')">
+            <i class="ri-shopping-cart-2-line"></i> Adicionar
+          </button>
+        </div>
+      </div>
+
+      <div class="product-card" data-id="P003" data-name="Headset Gamer Sonic Pro" data-price="249.00"
+        data-image="caminho/para/imagem3.png">
+        <img src="https://i.ibb.co/4wMWJhSP/image-removebg-preview.png" alt="Headset Gamer Sonic Pro">
+        <div class="product-info">
+          <h3>Headset Gamer Sonic Pro</h3>
+          <p class="product-price">R$ 249,00</p>
+          <button class="btn-adicionar-carrinho"
+            onclick="addItemToCart('P003', 'Headset Gamer Sonic Pro', 249.00, 'caminho/para/imagem3.png')">
+            <i class="ri-shopping-cart-2-line"></i> Adicionar
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+  <div id="cookie-banner" class="cookie-banner hidden">
+  <div class="cookie-content">
+    <p>Usamos dados de navegação para melhorar sua experiência. Concorda com o uso de cookies?</p>
+    <div class="cookie-buttons">
+      <button id="accept-cookies" class="btn accept">Concordar</button>
+      <button id="reject-cookies" class="btn reject">Rejeitar</button>
+    </div>
+  </div>
+</div>
+
+
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section footer-logo-social">
+        <a href="#" class="footer-logo">
+          <img src="imagem/logo branca completa.png" alt="CyberX Logo">
+        </a>
+        <div class="social-icons">
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-pinterest-p"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></i></a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3 class="footer-title">INFORMAÇÕES</h3>
+        <ul class="footer-links">
+          <li><a href="#">Sobre Nós</a></li>
+          <li><a href="#">Como Comprar</a></li>
+          <li><a href="#">Segurança</a></li>
+          <li><a href="#">Envio</a></li>
+          <li><a href="finaliza.html">Pagamento</a></li>
+          <li><a href="#">Tempo de Garantia</a></li>
+          <li><a href="#">Trocas e Devoluções</a></li>
+          <li><a href="#">Fale Conosco</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3 class="footer-title">ATENDIMENTO</h3>
+        <ul class="footer-contact">
+          <li><i class="ri-phone-fill"></i> (61) XXXXX-XXXX</li>
+          <li><i class="ri-mail-fill"></i> cyberx123@gmail.com</li>
+        </ul>
+      </div>
+
+      <div class="footer-section footer-payment-methods">
+        <h3 class="footer-title">FORMAS DE PAGAMENTO</h3>
+        <div class="payment-icons">
+          <img src="https://pontospravoar.com/wp-content/uploads/2020/08/Cart%C3%A3o-Visa-Gold.png" alt="Visa">
+
+
+
+
+          <img src="https://www.advocacianunes.com.br/wp-content/uploads/2022/04/logo-pix-icone-1024.png" alt="PIX">
+          <img
+            src="https://lh4.googleusercontent.com/proxy/_rEMkmbFH-KkPIXXsuVGSgufw9roMIGebRugrQbJO5Pk9Rx8DF-v8UKhwkhzyg6a8Bo93y_yScY3K6evyB3NE3Op_FXJHZDswD84OitssF53h5nESFHCt8uzJjVgM8b63AWEx0dMV06RUlbAlmHa_iUdJnaG_nMEd99FUJO4MSVgBs14JNrDxKTCkmI"
+            alt="Mercado Pago">
+          <img src="https://fdr.com.br/wp-content/uploads/2020/06/BancoInterMastercardGold.png" alt="Inter">
+
+
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+</body>
+
+</html><!-- BINARY CANVAS -->
+
+
+
+
+<script>
+  (function () {
+    const canvas = document.getElementById('binaryCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const fontSize = 16; // ajuste se quiser menos/más colunas
+    const chars = ['0', '1'];
+    const color = '#7b0000'; // muda a cor dos números aqui
+
+    let width, height, columns, drops;
+
+    function resize() {
+      // usa dimensões do body (para que o canvas fique só na área do body)
+      const bodyRect = document.body.getBoundingClientRect();
+      width = canvas.width = Math.max(1, Math.floor(bodyRect.width));
+      height = canvas.height = Math.max(1, Math.floor(bodyRect.height));
+      columns = Math.floor(width / fontSize) || 1;
+      drops = new Array(columns).fill(1);
+    }
+
+    // redimensiona quando a janela muda
+    window.addEventListener('resize', resize);
+    // também redimensiona quando fontes/carregamento mudarem
+    window.addEventListener('load', resize);
+    resize();
+
+    function draw() {
+      // rastro (ajuste alpha para mais/menos rastro)
+      ctx.fillStyle = 'rgba(0,0,0,0.05)';
+      ctx.fillRect(0, 0, width, height);
+
+      ctx.font = fontSize + 'px "Space Mono", monospace';
+      ctx.fillStyle = color;
+
+      for (let i = 0; i < columns; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        const x = i * fontSize;
+        const y = drops[i] * fontSize;
+
+        ctx.fillText(text, x, y);
+
+        if (y > height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+  })();
+</script>
+
+<script>
+  // ===== MENU HAMBÚRGUER LATERAL =====
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuToggle = document.getElementById("menu-toggle");
+    const sidebar = document.getElementById("sidebar");
+    const closeBtn = document.getElementById("close-btn");
+    const overlay = document.getElementById("overlay");
+
+    // Abre o menu
+    menuToggle.addEventListener("click", () => {
+      sidebar.classList.add("active");
+      overlay.classList.add("active");
+    });
+
+    // Fecha o menu
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.remove("active");
+      overlay.classList.remove("active");
+    });
+
+    // Fecha ao clicar fora
+    overlay.addEventListener("click", () => {
+      sidebar.classList.remove("active");
+      overlay.classList.remove("active");
+    });
+
+    // Fecha ao clicar em um link
+    document.querySelectorAll(".sidebar-links a").forEach(link => {
+      link.addEventListener("click", () => {
+        sidebar.classList.remove("active");
+        overlay.classList.remove("active");
+      });
+    });
+  });
+</script> 
+
+<script>
+  const banner = document.getElementById("cookie-banner");
+const acceptBtn = document.getElementById("accept-cookies");
+const rejectBtn = document.getElementById("reject-cookies");
+
+function showBanner() {
+  if (!localStorage.getItem("cookieChoice")) {
+    setTimeout(() => banner.classList.add("show"), 500); // pequeno delay ao entrar
+  }
+}
+
+function closeBanner(choice) {
+  localStorage.setItem("cookieChoice", choice);
+  banner.classList.add("hide");
+  setTimeout(() => {
+    banner.classList.add("hidden");
+  }, 600);
+}
+
+acceptBtn.addEventListener("click", () => closeBanner("accepted"));
+rejectBtn.addEventListener("click", () => closeBanner("rejected"));
+
+showBanner();
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="js/supabaseadm.js"></script>
+
+<script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+<script src="https://unpkg.com/gsap@3/dist/SplitText.min.js"></script>
+<script src="https://unpkg.com/gsap@3/dist/ScrambleTextPlugin.min.js"></script>
+<script src="js/index.js"></script>
+</body>
+
+</html>

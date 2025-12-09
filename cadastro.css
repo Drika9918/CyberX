@@ -1,4 +1,5 @@
-   @import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400..900&display=swap');
+
 #backgroud {
     position: fixed;
     inset: 0;
@@ -19,14 +20,11 @@
 
 #backgroud::after {
     content: '';
-
     width: inherit;
     height: inherit;
     position: fixed;
     inset: 0;
     background: linear-gradient(109deg, rgba(10, 12, 16, 0.99) 15%, rgba(10, 12, 16, 0.3) 59%, rgba(10, 12, 16, 0.99) 105%);
-
-
 }
 
 /* ============================================
@@ -94,7 +92,9 @@
 html, body {
     height: 100%;
     width: 100%;
- font-family: 'tektur', sans-serif;
+    font-family: 'tektur', sans-serif;
+    
+    /* CORREÇÃO AQUI: Removi a vírgula no final do linear-gradient e adicionei ponto e vírgula */
     background: 
         /* Camada 1: Vinheta vermelha nas bordas */
         radial-gradient(
@@ -110,9 +110,11 @@ html, body {
             var(--color-bg-deep) 30%,
             var(--color-bg-deep) 70%,
             #1A0000 100%
-        ),
-        /* Camada 3: Imagem de fundo montanhosa */
-        url('./image_654dcc.jpg') no-repeat center right / 50% auto;
+        );
+        /* Camada 3 (Comentada para evitar erro 404): Imagem de fundo montanhosa 
+        url('./image_654dcc.jpg') no-repeat center right / 50% auto; 
+        */
+
     color: var(--color-white);
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
@@ -198,7 +200,7 @@ body::before {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Título principal "Create sew acconnt." */
+/* Título principal "Create new account." */
 .minimal-title {
     font-size: 3.5rem;
     font-weight: 700;
@@ -209,7 +211,7 @@ body::before {
     position: relative;
     display: inline-block;
     text-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
- font-family: 'tektur', sans-serif;
+    font-family: 'tektur', sans-serif;
 }
 
 /* Ponto final vermelho */
@@ -288,7 +290,7 @@ body::before {
     outline: none;
     transition: var(--transition-smooth);
     box-shadow: var(--shadow-input);
- font-family: 'tektur', sans-serif;
+    font-family: 'tektur', sans-serif;
 }
 
 /* Placeholder */
@@ -298,7 +300,7 @@ body::before {
     opacity: 0.8;
 }
 
-/* Input com texto preenchido (como o email na imagem) */
+/* Input com texto preenchido */
 .minimal-input.filled {
     color: var(--color-white-off);
     font-weight: 400;
@@ -313,10 +315,12 @@ body::before {
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
     transform: translateY(-1px);
 }
+
 .form-field input:focus ~ .minimal-icon-right {
   color: var(--color-red-wine) !important;
   transform: translateY(-50%) scale(1.1) !important;
 }
+
 /* Ícones à direita dos inputs */
 .minimal-icon-right {
     position: absolute;
@@ -357,7 +361,7 @@ body::before {
 ============================================ */
 .minimal-buttons-container {
     display: grid;
-    grid-template-columns: 1fr 1.2fr; /* Proporção exata da imagem */
+    grid-template-columns: 1fr 1.2fr;
     gap: var(--spacing-sm);
     margin-top: var(--spacing-lg);
     width: 100%;
@@ -377,7 +381,7 @@ body::before {
     justify-content: center;
     gap: var(--spacing-xs);
     transition: var(--transition-smooth);
- font-family: 'tektur', sans-serif;
+    font-family: 'tektur', sans-serif;
     letter-spacing: 0.3px;
 }
 
@@ -441,6 +445,7 @@ body::before {
     transform: translateY(0);
     transition: transform 0.1s ease;
 }
+
 /* ============================================
    ESTILOS PARA MENSAGENS DE FEEDBACK
 ============================================ */
@@ -522,7 +527,19 @@ body::before {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ef476f'%3E%3Cpath d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/%3E%3C/svg%3E");
 }
 
-/* Responsividade para mensagens */
+/* Responsividade */
+@media (max-width: 1200px) {
+    .minimal-auth-page {
+        padding-left: 5%;
+    }
+    body {
+        background-size: 60% auto;
+    }
+    body::before {
+        right: 15%;
+    }
+}
+
 @media (max-width: 768px) {
     .premium-message {
         width: 95%;
@@ -530,109 +547,59 @@ body::before {
         padding: 14px 20px;
         font-size: 13px;
     }
-}
-/* ============================================
-   RESPONSIVIDADE
-============================================ */
-
-/* Telas médias - ajusta posição da imagem de fundo */
-@media (max-width: 1200px) {
-    .minimal-auth-page {
-        padding-left: 5%;
-    }
-    
-    body {
-        background-size: 60% auto;
-    }
-    
-    body::before {
-        right: 15%;
-    }
-}
-
-/* Tablet */
-@media (max-width: 768px) {
     .minimal-auth-page {
         padding: var(--spacing-lg);
         justify-content: center;
-        background: 
-            radial-gradient(
-                ellipse at 50% 50%,
-                transparent 30%,
-                var(--color-red-vignette) 70%,
-                rgba(10, 0, 0, 0.9) 100%
-            ),
-            linear-gradient(
-                135deg,
-                var(--color-red-dark) 0%,
-                var(--color-bg-deep) 100%
-            );
     }
-    
     body::before {
         display: none;
     }
-    
     .center-container {
         max-width: 100%;
     }
-    
     .minimal-title {
         font-size: 2.8rem;
     }
-    
     .minimal-buttons-container {
         grid-template-columns: 1fr;
         gap: var(--spacing-xs);
     }
 }
 
-/* Mobile */
 @media (max-width: 480px) {
     .minimal-auth-page {
         padding: var(--spacing-md);
     }
-    
     .minimal-title {
         font-size: 2.2rem;
     }
-    
     .start-text {
         font-size: 0.75rem;
         letter-spacing: 2px;
     }
-    
     .login-link {
         font-size: 0.95rem;
     }
-    
     .minimal-input {
         height: 52px;
         font-size: 0.95rem;
     }
-    
     .btn-change-method,
     .btn-primary {
         height: 48px;
         font-size: 0.95rem;
     }
-    
     .minimal-buttons-container {
         gap: var(--spacing-xs);
     }
 }
 
-/* ============================================
-   EFEITOS ADICIONAIS DE DESIGN
-============================================ */
-
-/* Sombra suave nos inputs ao hover */
+/* Efeitos adicionais */
 .input-container:hover .minimal-input {
     border-color: rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
-/* Foco acessível */
 .minimal-input:focus-visible,
 .btn-primary:focus-visible,
 .btn-change-method:focus-visible {
@@ -640,7 +607,6 @@ body::before {
     outline-offset: 2px;
 }
 
-/* Animações sutis */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }

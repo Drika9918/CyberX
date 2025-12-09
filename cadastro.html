@@ -5,22 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro | CyberX Minimal</title>
+    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link rel="stylesheet" href="cadastro.css">
     <link rel="shortcut icon" href="imagem/icon da logo.png" type="image/x-icon">
 </head>
 
 <body class="minimal-auth-page">
- <div id="backgroud">
-    <video loop autoplay muted>
-      <source src="imagem/rudo-surebrec-gachiakuta.3840x2160.mp4" type="video/mp4">
-    </video>
-  </div>
+<!--
+    <div id="backgroud">
+        <video loop autoplay muted>
+            <source src="imagem/rudo-surebrec-gachiakuta.3840x2160.mp4" type="video/mp4">
+        </video>
+    </div>
+-->
     <div class="center-container">
-
         <div class="minimal-card">
-
+            
             <div class="card-header">
                 <p class="start-text">COMECE GRATUITAMENTE</p>
                 <h1 class="minimal-title">
@@ -33,8 +36,7 @@
 
                 <div class="form-field">
                     <div class="input-container">
-                        <input type="text" id="cadastro-nome" placeholder="Nome Completo" required
-                            class="minimal-input">
+                        <input type="text" id="cadastro-nome" placeholder="Nome Completo" required class="minimal-input">
                         <i class="fas fa-user minimal-icon-right"></i>
                     </div>
                 </div>
@@ -49,10 +51,8 @@
 
                 <div class="form-field">
                     <div class="input-container">
-                        <input type="password" id="cadastro-senha" placeholder="Senha" required minlength="6"
-                            class="minimal-input">
+                        <input type="password" id="cadastro-senha" placeholder="Senha" required minlength="6" class="minimal-input">
                         <button type="button" class="toggle-password" onclick="togglePassword('cadastro-senha')">
-
                             <i class="fas fa-eye"></i>
                         </button>
                     </div>
@@ -60,12 +60,9 @@
 
                 <div class="form-field">
                     <div class="input-container">
-                        <input type="password" id="cadastro-confirma-senha" placeholder="Confirmar Senha" required
-                            minlength="6" class="minimal-input">
-                        <button type="button" class="toggle-password"
-                            onclick="togglePassword('cadastro-confirma-senha')">
+                        <input type="password" id="cadastro-confirma-senha" placeholder="Confirmar Senha" required minlength="6" class="minimal-input">
+                        <button type="button" class="toggle-password" onclick="togglePassword('cadastro-confirma-senha')">
                             <div class="input-underline"></div>
-
                             <i class="fas fa-eye"></i>
                         </button>
                     </div>
@@ -82,11 +79,17 @@
         </div>
     </div>
      
-       <script src="js/session.js"></script>
-       <script src="js/supabase-config.js"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+    <script src="js/supabase-config.js"></script>
+
+    <script src="js/auth.js"></script>
+
     <script src="js/cadastro.js"></script>
+
+    <script src="js/session.js"></script>
+
     <script>
-        // Função para alternar visibilidade da senha
         function togglePassword(inputId) {
             const input = document.getElementById(inputId);
             const toggleButton = input.closest('.input-container').querySelector('.toggle-password');
@@ -104,5 +107,4 @@
         }
     </script>
 </body>
-
 </html>

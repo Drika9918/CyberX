@@ -7,94 +7,83 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
 
-  <!-- CSS ATUALIZADO -->
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style-login.css">
   <link rel="shortcut icon" href="imagem/icon da logo.png">
 
-  <!-- FONTE INTER -->
-
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-
 </head>
 
 <body class="auth-page">
-
-  <!-- CONTEÚDO PRINCIPAL -->
+<!--
   <div id="backgroud">
     <video loop autoplay muted>
       <source src="imagem/rudo-surebrec-gachiakuta.3840x2160.mp4" type="video/mp4">
     </video>
   </div>
+-->
   <main class="login-layout-split" id="main-content">
 
-    <!-- COLUNA ESQUERDA (FORMULÁRIO) -->
     <div class="right-login-content">
-  <div class="card-login" id="login-card">
-    <h1 class="login-title text-shimmer-red" id="main-login-title">LOGIN</h1>
-    <form class="login-form" id="login-form">
-      <div class="field">
-        <div class="input-container">
-          <input type="email" id="login-email" placeholder="Digite seu email" required aria-label="Digite seu email" class="input-com-icone">
-          <i class="fas fa-envelope icone-input"></i>
-          <div class="input-underline"></div>
-        </div>
-      </div>
+      <div class="card-login" id="login-card">
+        <h1 class="login-title text-shimmer-red" id="main-login-title">LOGIN</h1>
+        <form class="login-form" id="login-form">
+          <div class="field">
+            <div class="input-container">
+              <input type="email" id="login-email" placeholder="Digite seu email" required aria-label="Digite seu email" class="input-com-icone">
+              <i class="fas fa-envelope icone-input"></i>
+              <div class="input-underline"></div>
+            </div>
+          </div>
 
-      <div class="field">
-        <div class="input-container">
-          <input type="password" id="login-senha" placeholder="Digite sua senha" required aria-label="Digite sua senha" class="input-com-icone">
-          <i class="fas fa-lock icone-input"></i>
-          <div class="input-underline"></div>
-        </div>
-      </div>
-      <div class="forgot-password">
-        <a href="#" aria-label="Recuperar senha">Esqueci minha senha?</a>
-      </div>
+          <div class="field">
+            <div class="input-container">
+              <input type="password" id="login-senha" placeholder="Digite sua senha" required aria-label="Digite sua senha" class="input-com-icone">
+              <i class="fas fa-lock icone-input"></i>
+              <div class="input-underline"></div>
+            </div>
+          </div>
+          <div class="forgot-password">
+            <a href="#" aria-label="Recuperar senha">Esqueci minha senha?</a>
+          </div>
 
-      <button type="submit" class="btn-login">
-        <span id="login-text">Entrar</span>
-      </button>
-    </form>
-    
-    <!-- NOVO: "Criar conta" adicionado abaixo do botão -->
-    <div class="create-account-link">
-      <a href="cadastro.html" class="create-account-btn">
-        <span>Criar conta</span>
-        <i class="fas fa-arrow-right"></i>
-      </a>
+          <button type="submit" class="btn-login">
+            <span id="login-text">Entrar</span>
+          </button>
+        </form>
+
+        <div class="create-account-link">
+          <a href="cadastro.html" class="create-account-btn">
+            <span>Criar conta</span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+
+      </div>
     </div>
-    
-    
-  </div>
-</div>
 
-    <!-- COLUNA DIREITA (LOGO - NÃO ALTERADA) -->
     <div class="left-scanner-section">
-      <!-- LOGO ORIGINAL (NÃO ALTERAR) -->
       <img src="imagem/icon da logo.png" alt="Logo" class="final-logo-position" id="final-logo">
-
       <div class="floating-shadow" id="logo-shadow-target"></div>
     </div>
   </main>
 
-
-
-  <!-- SCRIPTS -->
-  <script src="js/login.js"></script>
-  <script src="js/animation.js"></script>
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
   <script src="https://unpkg.com/feather-icons"></script>
+
   <script src="js/supabase-config.js"></script>
+
   <script src="js/auth.js"></script>
   <script src="js/session.js"></script>
+
+  <script src="js/login.js"></script>
+  <script src="js/animation.js"></script>
   <script src="js/text-shimmer.js"></script>
   <script src="js/init-shimmer.js"></script>
+
   <script>
-    // CONTROLE DO FORMULÁRIO DE LOGIN
     document.addEventListener('DOMContentLoaded', () => {
-      // Iniciar animação Netflix
+      // Iniciar animação (se existir)
       setTimeout(() => {
         if (window.startNetflixAnimation) {
           window.startNetflixAnimation();
@@ -118,22 +107,27 @@
           return;
         }
 
-        // Mostrar loading
+        // Feedback visual de carregamento
         const originalText = loginText.textContent;
         loginText.textContent = 'ENTRANDO...';
         btnLogin.style.opacity = '0.7';
         btnLogin.disabled = true;
 
         try {
-          // Fazer login
+          // CHAMA A FUNÇÃO DE LOGIN DO auth.js
           const result = await window.loginUser(email, senha);
 
           if (result.success) {
             showLoginMessage(`✅ Bem-vindo, ${email.split('@')[0]}!`, 'success');
 
-            // Redirecionar baseado no role
+            // REDIRECIONAMENTO INTELIGENTE (User vs Admin)
             setTimeout(() => {
-              window.redirectBasedOnRole(result.role);
+              if (window.redirectBasedOnRole) {
+                  window.redirectBasedOnRole(result.role);
+              } else {
+                  // Fallback se a função não existir
+                  window.location.href = result.role === 'admin' ? 'adm-desboard.html' : 'client-home.html';
+              }
             }, 1500);
 
           } else {
@@ -142,7 +136,8 @@
           }
 
         } catch (error) {
-          showLoginMessage('❌ Erro: ' + error.message, 'error');
+          console.error(error);
+          showLoginMessage('❌ Erro: ' + (error.message || 'Erro desconhecido'), 'error');
           resetLoginButton(originalText);
         }
       });
@@ -154,23 +149,18 @@
       }
 
       function showLoginMessage(text, type) {
-        // Remove mensagens anteriores
         const oldMsg = document.querySelector('.login-message');
         if (oldMsg) oldMsg.remove();
 
-        // Cria nova mensagem
         const msg = document.createElement('div');
         msg.className = 'login-message';
         msg.textContent = text;
 
-        // Estilos
         const bgColor = type === 'success' ? 'rgba(6, 214, 160, 0.2)' :
-          type === 'error' ? 'rgba(239, 71, 111, 0.2)' :
-            'rgba(255, 209, 102, 0.2)';
+          type === 'error' ? 'rgba(239, 71, 111, 0.2)' : 'rgba(255, 209, 102, 0.2)';
 
         const borderColor = type === 'success' ? '#06d6a0' :
-          type === 'error' ? '#ef476f' :
-            '#ffd166';
+          type === 'error' ? '#ef476f' : '#ffd166';
 
         msg.style.cssText = `
         background: ${bgColor};
@@ -183,21 +173,18 @@
         animation: fadeIn 0.3s ease;
       `;
 
-        // Insere após o formulário
         form.parentNode.insertBefore(msg, form.nextSibling);
 
-        // Remove após 5 segundos
         setTimeout(() => {
           if (msg.parentElement) msg.remove();
         }, 5000);
       }
 
-      // Adicionar estilo de animação
       const style = document.createElement('style');
       style.textContent = '@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }';
       document.head.appendChild(style);
     });
   </script>
 
-</html>
 </body>
+</html>

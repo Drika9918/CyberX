@@ -1,5 +1,5 @@
 // ============================================
-// CONTROLE DE SESSÃO - VERSÃO CORRIGIDA (SEM REDIRECIONAMENTO AUTOMÁTICO)
+// CONTROLE DE SESSÃO - VERSÃO CORRIGIDA (PERMITE CADASTRO)
 // ============================================
 
 /**
@@ -53,39 +53,30 @@ async function protectPage(allowedRoles = ['admin', 'client'], redirectTo = 'ind
 }
 
 /**
- * SETUP DE LISTENER DE AUTENTICAÇÃO (modificado)
+ * SETUP DE LISTENER DE AUTENTICAÇÃO
  */
 function setupAuthListener() {
+    if (!window.supabase) return;
+
     supabase.auth.onAuthStateChange(async (event, session) => {
-        console.log('📡 Evento de auth:', event);
-        
-        // APENAS LOG PARA DEBUG, NÃO REDIRECIONA
+        // APENAS LOG PARA DEBUG, NÃO REDIRECIONA AUTOMATICAMENTE AQUI
         switch (event) {
             case 'SIGNED_IN':
                 console.log('✅ Usuário fez login');
                 break;
-
             case 'SIGNED_OUT':
                 console.log('🚪 Usuário fez logout');
-                break;
-
-            case 'USER_UPDATED':
-                console.log('🔄 Usuário atualizado');
                 break;
         }
     });
 }
 
 /**
- * INICIALIZAR VERIFICAÇÃO (modificado)
+ * INICIALIZAR VERIFICAÇÃO
  */
 async function initAuthCheck() {
-    console.log('Iniciando verificação de auth...');
-    
-    // Configurar listener
+    console.log('Iniciando listener de auth...');
     setupAuthListener();
-    
-    console.log('Verificação de auth concluída');
 }
 
 /**
@@ -108,39 +99,40 @@ async function getCurrentUserInfo() {
 }
 
 /**
- * VERIFICAR SE É PÁGINA DE LOGIN
+ * VERIFICAR SE É PÁGINA PÚBLICA (LOGIN OU CADASTRO)
+ * AQUI ESTAVA O ERRO: Adicionei cadastro.html na lista de permitidos.
  */
-function isLoginPage() {
+function isPublicPage() {
     const currentPath = window.location.pathname;
     return currentPath.includes('index.html') || 
            currentPath.endsWith('/') || 
-           currentPath.includes('login');
+           currentPath.includes('login') ||
+           currentPath.includes('cadastro.html') ||        // <--- ADICIONADO
+           currentPath.includes('sucesso-cadastro.html');  // <--- ADICIONADO
 }
 
 // ============================================
-// INICIALIZAÇÃO MODIFICADA
+// INICIALIZAÇÃO DO SCRIPT
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM carregado, verificando auth...');
+    console.log('🛡️ session.js carregado.');
     
-    // Só executa se NÃO for página de login
-    if (!isLoginPage()) {
-        console.log('Página protegida, verificando login...');
+    // Só executa verificação de segurança se NÃO for página pública
+    if (!isPublicPage()) {
+        console.log('🔒 Página protegida detectada. Verificando credenciais...');
         initAuthCheck();
         
         // Verificar se está logado (apenas para páginas protegidas)
         setTimeout(async () => {
             const session = await checkIfUserIsLogged();
             if (!session) {
-                console.log('Usuário não logado em página protegida, redirecionando...');
+                console.warn('⛔ Usuário não logado em página protegida. Redirecionando...');
                 window.location.href = 'index.html';
             }
         }, 500);
     } else {
-        console.log('Página de login, auth check desativado');
-        // Na página de login, NÃO verificamos automaticamente
-        // O usuário precisa clicar no botão
+        console.log('🔓 Página pública (Login/Cadastro). Verificação automática pausada.');
     }
 });
 
@@ -153,6 +145,3 @@ window.setupAuthListener = setupAuthListener;
 window.initAuthCheck = initAuthCheck;
 window.getCurrentUserInfo = getCurrentUserInfo;
 window.checkIfUserIsLogged = checkIfUserIsLogged;
-window.isLoginPage = isLoginPage;
-
-console.log('✅ Sistema de sessão carregado!');

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Vendas | CyberX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="brand"><span>CYBERX</span></div>
+        <nav>
+            <a href="admin-dashboard.html" class="menu-item active"><i class="fas fa-chart-line"></i> DASHBOARD</a>
+            <div class="submenu">
+                <a href="#" style="color: white;">PENDENTE</a>
+                <a href="#">COMPRADOS</a>
+            </div>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <h1 class="page-title" style="text-align: center;">dashboard</h1>
+
+        <div class="stats-cards">
+            <div class="stat-card" style="grid-column: span 2; background-color: #220000;">
+                <h3>TOTAL FATURADO ESSE MES</h3>
+                <h1 style="font-size: 3rem; margin: 10px 0;">$12,000,0</h1>
+                <span style="color: green;">+20000</span>
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+                <div style="background: #330000; padding: 20px; flex: 1; text-align: center;">SETEMBRO</div>
+                <div style="background: #330000; padding: 20px; flex: 1; text-align: center;">SETEMBRO</div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 20px;">
+                <button style="background: #333; color: white; border: none; padding: 5px 10px;">MESES</button>
+                <button style="background: red; color: white; border: none; padding: 5px 10px;">MESES</button>
+            </div>
+            
+            <div style="position: relative; height: 200px; border-left: 1px solid #444; border-bottom: 1px solid #444;">
+                <div class="chart-line"></div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

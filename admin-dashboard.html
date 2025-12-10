@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel ADM | CyberX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="admin-style.css"></head>
+<body>
+
+    <aside class="sidebar">
+        <div class="brand"><span>CYBERX</span></div>
+        <nav>
+            <div class="menu-item active">BEM VINDO <span>ADM</span></div>
+            
+            <a href="admin-dashboard.html" class="menu-item active"><i class="fas fa-chart-line"></i> DASHBOARD</a>
+            <div class="submenu">
+                <a href="#">PENDENTE</a>
+                <a href="admin-vendas.html">VENDAS</a>
+            </div>
+
+            <a href="admin-produtos.html" class="menu-item"><i class="fas fa-box"></i> PRODUTOS</a>
+            <a href="#" class="menu-item"><i class="fas fa-users"></i> USUARIOS</a>
+        </nav>
+        <div class="bottom-menu">
+            <a href="#" class="menu-item"><i class="fas fa-bookmark"></i> FAVORITO</a>
+            <a href="#" class="menu-item"><i class="fas fa-cog"></i> PERFIL</a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="top-header">
+            <i class="fas fa-search"></i>
+            <i class="fas fa-user"></i>
+            <i class="fas fa-shopping-cart"></i>
+        </header>
+
+        <h1 class="page-title">PAINEL ADM</h1>
+
+        <div class="form-grid">
+            <div>
+                <div class="input-group">
+                    <label>EMAIL</label>
+                    <input type="text" value="admin@cyberx.com" readonly>
+                </div>
+                <div class="input-group">
+                    <label>NUMERO</label>
+                    <input type="text" placeholder="(00) 00000-0000">
+                </div>
+                <div class="input-group full-width">
+                    <label>ENDERECO</label>
+                    <input type="text" placeholder="Endereço completo">
+                </div>
+            </div>
+
+            <div class="avatar-section">
+                <div class="red-sun-circle">
+                    <i class="fas fa-user-ninja samurai-icon"></i>
+                </div>
+                <h2 style="margin-top: 10px; border-bottom: 2px solid red;">ADM</h2>
+                <i class="fas fa-pen" style="position: absolute; bottom: 40px; right: 40px;"></i>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn btn-save">SALVA</button>
+            <button class="btn btn-edit">EDITA</button>
+            <button class="btn btn-edit">CANCELA</button>
+            <button class="btn btn-edit">MUDA SENHA</button>
+        </div>
+    </main>
+
+    <footer>
+        <img src="imagem/icon da logo.png" height="30">
+        <div>
+            <span>ATENDIMENTO</span><br>
+            (61) XXXXX-XXXX
+        </div>
+        <div style="font-size: 1.5rem;"><i class="fab fa-cc-visa"></i> <i class="fab fa-cc-mastercard"></i></div>
+    </footer>
+</body>
+</html>

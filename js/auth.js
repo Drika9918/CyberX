@@ -1,13 +1,30 @@
 // ============================================
 // SISTEMA DE AUTENTICAÇÃO - ATUALIZADO
 // ============================================
+console.log('=== AUTH.JS INICIADO ===');
+console.log('Supabase disponível no auth.js?', typeof supabase);
+
+// Verificar se Supabase está disponível
+if (typeof supabase === 'undefined') {
+    console.error('❌ ERRO CRÍTICO: Supabase não está definido no auth.js!');
+    console.log('Tentando usar window.supabase...');
+    
+    if (typeof window.supabase !== 'undefined') {
+        // Se estiver no window, usa
+        supabase = window.supabase;
+        console.log('✅ Usando window.supabase');
+    } else {
+        throw new Error('Supabase não está disponível. Verifique a ordem de carregamento dos scripts.');
+    }
+}
+
 
 /**
  * CADASTRAR CLIENTE - FUNCIONANDO 100%
  */
 async function signUpClient(email, password, fullName, username) {
     try {
-        console.log('📝 Iniciando cadastro para:', email);
+        console.log('📝 Iniciando cadastro para:', username);
         
         // 1. VALIDAÇÕES BÁSICAS
         if (email.toLowerCase().includes('admin@admin.com')) {
@@ -239,15 +256,17 @@ function redirectBasedOnRole(role) {
             window.location.href = 'client-home.html';
             break;
         default:
-            window.location.href = 'login.html';
+            window.location.href = 'Findex.html';
     }
 }
+console.log('✅ Função signUpClient criada:', typeof signUpClient);
 
-// EXPORTAR FUNÇÕES
+// EXPORTAR
 window.signUpClient = signUpClient;
 window.loginUser = loginUser;
 window.logoutUser = logoutUser;
 window.getCurrentSession = getCurrentSession;
 window.redirectBasedOnRole = redirectBasedOnRole;
 
-console.log('✅ Sistema de autenticação carregado!');
+console.log('✅✅✅ TODAS funções exportadas para window!');
+console.log('signUpClient no window?', typeof window.signUpClient);

@@ -22,7 +22,6 @@
         <div class="minimal-card">
 
             <div class="card-header">
-                <p class="start-text">COMECE GRATUITAMENTE</p>
                 <h1 class="minimal-title">
                     Criar Nova Conta<span class="red-dot">.</span>
                 </h1>
@@ -37,6 +36,15 @@
                             class="minimal-input">
                         <i class="fas fa-user minimal-icon-right"></i>
                     </div>
+                </div>
+                <!-- Nome de Usuário (NOVO) -->
+                <div class="form-field">
+                    <div class="input-container">
+                        <input type="text" id="cadastro-username" placeholder="Nome de Usuário" required 
+                               class="minimal-input" pattern="[a-zA-Z0-9_]+" minlength="3" maxlength="20">
+                        <i class="fas fa-at minimal-icon-right"></i>
+                    </div>
+                    <small class="username-hint">Use apenas letras, números e underline (3-20 caracteres)</small>
                 </div>
 
                 <div class="form-field">
@@ -80,11 +88,14 @@
             </form>
 
         </div>
-    </div>
-     
-       <script src="js/session.js"></script>
-       <script src="js/supabase-config.js"></script>
+    </div>        
+     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+    <script src="js/supabase-config.js"></script>
+    <script src="js/auth.js"></script>
     <script src="js/cadastro.js"></script>
+    <script src="js/session.js"></script>
+  
     <script>
         // Função para alternar visibilidade da senha
         function togglePassword(inputId) {

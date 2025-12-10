@@ -115,52 +115,75 @@
 
     <br><br><br><br>
   </main>
-  <section class="featured-products container-carrinho" id="featured-products">
-    <h2 class="rainbow-text">Produtos em Destaque</h2>
-    <div class="products-grid">
+ <section class="featured-products container-carrinho" id="featured-products">
+        <h2 class="rainbow-text">Produtos em Destaque</h2>
+        <div class="products-grid">
 
-      <div class="product-card" data-id="P001" data-name="Mouse Gamer CyberX V1" data-price="129.90"
-        data-image="caminho/para/imagem1.png">
-        <img src="https://i.ibb.co/S4PZc861/image.png" alt="Mouse Gamer CyberX V1">
-        <div class="product-info">
-          <h3>Mouse Gamer CyberX V1</h3>
-          <p class="product-price">R$ 129,90</p>
-          <button class="btn-adicionar-carrinho"
-            onclick="addItemToCart('P001', 'Mouse Gamer CyberX V1', 129.90, 'caminho/para/imagem1.png')">
-            <i class="ri-shopping-cart-2-line"></i> Adicionar
-          </button>
-        </div>
-      </div>
+            <!-- Dentro de cada .product-card, ajuste assim: -->
+            <!-- Para cada produto, use esta estrutura: -->
+            <!-- MOUSE GAMER -->
+            <div class="product-card" data-id="P001" data-name="Mouse Gamer CyberX V1" data-price="129.90">
+                <div class="product-image-container">
+                    <img src="https://i.ibb.co/S4PZc861/image.png" alt="Mouse Gamer CyberX V1">
+                    <div class="image-overlay"></div>
+                </div>
 
-      <div class="product-card" data-id="P002" data-name="Teclado Mecânico RGB T900" data-price="399.99"
-        data-image="caminho/para/imagem2.png">
-        <img src="https://i.ibb.co/0y19sKdp/image.png" alt="Teclado Mecânico RGB T900">
-        <div class="product-info">
-          <h3>Teclado Mecânico RGB T900</h3>
-          <p class="product-price">R$ 399,99</p>
-          <button class="btn-adicionar-carrinho"
-            onclick="addItemToCart('P002', 'Teclado Mecânico RGB T900', 399.99, 'caminho/para/imagem2.png')">
-            <i class="ri-shopping-cart-2-line"></i> Adicionar
-          </button>
-        </div>
-      </div>
+                <div class="product-name-overlay">
+                    <h3>Mouse Gamer CyberX V1</h3>
+                </div>
 
-      <div class="product-card" data-id="P003" data-name="Headset Gamer Sonic Pro" data-price="249.00"
-        data-image="caminho/para/imagem3.png">
-        <img src="https://i.ibb.co/4wMWJhSP/image-removebg-preview.png" alt="Headset Gamer Sonic Pro">
-        <div class="product-info">
-          <h3>Headset Gamer Sonic Pro</h3>
-          <p class="product-price">R$ 249,00</p>
-          <button class="btn-adicionar-carrinho"
-            onclick="addItemToCart('P003', 'Headset Gamer Sonic Pro', 249.00, 'caminho/para/imagem3.png')">
-            <i class="ri-shopping-cart-2-line"></i> Adicionar
-          </button>
-        </div>
+                <div class="product-bottom-bar">
+                    <div class="bar-content">
+                        <p class="product-price-bar">R$ 129,90</p>
+                        <button class="btn-ver-produto" onclick="window.location.href='produto.html?id=P001'">
+                            VER PRODUTO
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-      </div>
+            <!-- TECLADO MECÂNICO -->
+            <div class="product-card" data-id="P002" data-name="Teclado Mecânico RGB T900" data-price="399.99">
+                <div class="product-image-container">
+                    <img src="https://i.ibb.co/0y19sKdp/image.png" alt="Teclado Mecânico RGB T900">
+                    <div class="image-overlay"></div>
+                </div>
 
-    </div>
-  </section>
+                <div class="product-name-overlay">
+                    <h3>Teclado Mecânico RGB T900</h3>
+                </div>
+
+                <div class="product-bottom-bar">
+                    <div class="bar-content">
+                        <p class="product-price-bar">R$ 399,99</p>
+                        <button class="btn-ver-produto" onclick="window.location.href='produto.html?id=P002'">
+                            VER PRODUTO
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HEADSET GAMER -->
+            <div class="product-card" data-id="P003" data-name="Headset Gamer Sonic Pro" data-price="249.00">
+                <div class="product-image-container">
+                    <img src="https://i.ibb.co/4wMWJhSP/image-removebg-preview.png" alt="Headset Gamer Sonic Pro">
+                    <div class="image-overlay"></div>
+                </div>
+
+                <div class="product-name-overlay">
+                    <h3>Headset Gamer Sonic Pro</h3>
+                </div>
+
+                <div class="product-bottom-bar">
+                    <div class="bar-content">
+                        <p class="product-price-bar">R$ 249,00</p>
+                        <button class="btn-ver-produto" onclick="window.location.href='produto.html?id=P003'">
+                            VER PRODUTO
+                        </button>
+                    </div>
+                </div>
+            </div>
+    </section>
   <div id="cookie-banner" class="cookie-banner hidden">
   <div class="cookie-content">
     <p>Usamos dados de navegação para melhorar sua experiência. Concorda com o uso de cookies?</p>
@@ -363,5 +386,6 @@ showBanner();
 <script src="https://unpkg.com/gsap@3/dist/ScrambleTextPlugin.min.js"></script>
 <script src="js/index.js"></script>
 </body>
+
 
 </html>

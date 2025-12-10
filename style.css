@@ -614,6 +614,144 @@ div {
   color: #7e0303;
 }
 
+/* ======================================================= */
+/* CORREÇÃO: CARD COM POSICIONAMENTO CORRETO */
+/* ======================================================= */
+
+/* Reset do card - versão mais simples */
+.product-card {
+  background-color: var(--black-soft);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+  border: 1px solid var(--gray-700);
+  position: relative;
+  height: 350px; /* Altura menor */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Container da imagem - fixando no topo */
+.product-image-container {
+  flex: 1; /* Ocupa o espaço disponível */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+
+/* A imagem centralizada */
+.product-card img {
+  max-width: 100%;
+  max-height: 180px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+/* Efeito de zoom suave */
+.product-card:hover img {
+  transform: scale(1.05);
+}
+
+/* NOME DO PRODUTO - AQUI É ONDE ESTAVA O ERRO */
+.product-name-container {
+  padding: 15px 20px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5); /* Fundo escuro sutil */
+}
+
+.product-name-container h3 {
+  font-family: 'Tektur', sans-serif;
+  font-size: 1.2rem !important; /* Tamanho normal */
+  color: var(--white);
+  margin: 0;
+  font-weight: bold;
+  line-height: 1.3;
+}
+
+/* BARRA INFERIOR BORRADA - AGORA CORRETA */
+.product-bottom-bar {
+  background: rgba(20, 20, 20, 0.85); /* Mais opaco */
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  padding: 15px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  min-height: 70px; /* Altura fixa */
+}
+
+/* Linha de brilho removida para simplificar */
+
+/* Container do conteúdo da barra */
+.bar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* PREÇO AJUSTADO (menor) */
+.product-price-bar {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.3rem !important; /* MENOR como você pediu */
+  color: var(--red-300);
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Símbolo do Real menor */
+.product-price-bar::before {
+  content: "R$ ";
+  font-size: 1rem; /* Símbolo menor */
+  color: var(--gray-400);
+}
+
+/* BOTÃO VER PRODUTO (compacto) */
+.btn-ver-produto {
+  background: rgba(123, 0, 0, 0.9);
+  color: var(--white);
+  font-family: 'Tektur', sans-serif;
+  font-weight: bold;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.btn-ver-produto:hover {
+  background: rgba(185, 28, 28, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(123, 0, 0, 0.4);
+}
+
+/* Efeito hover no card */
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(123, 0, 0, 0.3);
+}
+
+/* Ajuste do grid */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  justify-content: center;
+}
+
+/* Removendo estilos antigos que podem estar conflitando */
+.image-overlay,
+.product-name-overlay {
+  display: none !important;
+}
+
 /* == ====== ICON MINHA CONTA ======-*/
 /* CONTAINER PRINCIPAL */
 .user-menu-dropdown {
@@ -1447,4 +1585,5 @@ div {
     left: 20rem;
     bottom: 10rem;
   }
+
 }

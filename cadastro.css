@@ -290,7 +290,17 @@ body::before {
     box-shadow: var(--shadow-input);
  font-family: 'tektur', sans-serif;
 }
-
+/* Adicione no final do cadastro.css */
+.username-hint {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.8rem;
+    color: var(--color-gray-text);
+    opacity: 0.8;
+    padding-left: 8px;
+    font-family: 'Tektur', sans-serif;
+    transition: var(--transition-smooth);
+}
 /* Placeholder */
 .minimal-input::placeholder {
     color: var(--color-gray-text);

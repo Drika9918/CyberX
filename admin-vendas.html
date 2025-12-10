@@ -2,48 +2,101 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Vendas | CyberX</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendas | CyberX ADM</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="admin-style.css">
 </head>
 <body>
+
     <aside class="sidebar">
-        <div class="brand"><span>CYBERX</span></div>
-        <nav>
-            <a href="admin-dashboard.html" class="menu-item active"><i class="fas fa-chart-line"></i> DASHBOARD</a>
+        <div class="brand"><h2>CYBER<span>X</span></h2></div>
+        <div class="welcome-text">BEM VINDO <span>ADM</span></div>
+        <nav class="menu-nav">
+            <a href="admin-dashboard.html" class="menu-item active"><i class="fas fa-chart-line"></i> <span>DASHBOARD</span></a>
             <div class="submenu">
-                <a href="#" style="color: white;">PENDENTE</a>
-                <a href="#">COMPRADOS</a>
+                <a href="#" class="submenu-link">PENDENTE</a>
+                <a href="admin-vendas.html" class="submenu-link" style="color: white;">COMPRADOS</a>
             </div>
+            <a href="admin-produtos.html" class="menu-item"><i class="fas fa-box"></i> <span>PRODUTOS</span></a>
+            <a href="#" class="menu-item"><i class="fas fa-users"></i> <span>USUARIOS</span></a>
+            <a href="admin-cadastro.html" class="menu-item"><i class="fas fa-edit"></i> <span>EDITA PRODUTOS</span></a>
         </nav>
+        <div class="sidebar-footer">
+            <a href="#" class="menu-item"><i class="fas fa-bookmark"></i> <span>FAVORITO</span></a>
+            <a href="#" class="menu-item"><i class="fas fa-cog"></i> <span>PERFIL</span></a>
+            <a href="#" onclick="logout()" class="menu-item"><i class="fas fa-sign-out-alt"></i> <span>SAIR</span></a>
+        </div>
     </aside>
 
     <main class="main-content">
-        <h1 class="page-title" style="text-align: center;">dashboard</h1>
-
-        <div class="stats-cards">
-            <div class="stat-card" style="grid-column: span 2; background-color: #220000;">
-                <h3>TOTAL FATURADO ESSE MES</h3>
-                <h1 style="font-size: 3rem; margin: 10px 0;">$12,000,0</h1>
-                <span style="color: green;">+20000</span>
-            </div>
-
-            <div style="display: flex; gap: 10px;">
-                <div style="background: #330000; padding: 20px; flex: 1; text-align: center;">SETEMBRO</div>
-                <div style="background: #330000; padding: 20px; flex: 1; text-align: center;">SETEMBRO</div>
-            </div>
+        <div class="top-bar">
+            <i class="fas fa-search icon-btn"></i>
+            <i class="fas fa-user icon-btn"></i>
+            <i class="fas fa-shopping-cart icon-btn"></i>
         </div>
 
-        <div class="chart-container">
-            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 20px;">
-                <button style="background: #333; color: white; border: none; padding: 5px 10px;">MESES</button>
-                <button style="background: red; color: white; border: none; padding: 5px 10px;">MESES</button>
+        <h1 class="page-title">DASHBOARD</h1>
+
+        <div class="stats-grid">
+            <div class="stat-card" style="grid-column: span 2;">
+                <div class="stat-title">TOTAL FATURADO ESSE MÊS</div>
+                <div class="stat-value">$12,000,0</div>
+                <div class="stat-sub">+20000</div>
             </div>
             
-            <div style="position: relative; height: 200px; border-left: 1px solid #444; border-bottom: 1px solid #444;">
-                <div class="chart-line"></div>
+            <div class="stat-card" style="background-color: #1a0000; display:flex; align-items:center; justify-content:center;">
+                <div class="stat-title" style="text-align:center;">MELHORES MESES<br><br><span style="font-size:1.5rem; color:white;">SETEMBRO</span></div>
             </div>
         </div>
+
+        <div class="chart-area">
+            <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                <button style="padding: 5px 15px; background: #333; color: white; border: none;">MESES</button>
+                <button style="padding: 5px 15px; background: var(--red-cyber); color: white; border: none;">MESES</button>
+            </div>
+            <div class="chart-line"></div>
+        </div>
     </main>
+
+    <footer class="footer-admin-area">
+        <div class="footer-container">
+            <div class="footer-section footer-logo-social">
+                <a href="#" class="footer-logo"><img src="imagem/logo branca completa.png" alt="CyberX" class="footer-logo-img"></a>
+                <div class="social-icons">
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">INFORMAÇÕES</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Sobre Nós</a></li>
+                    <li><a href="#">Como Comprar</a></li>
+                    <li><a href="#">Segurança</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">ATENDIMENTO</h3>
+                <ul class="footer-contact">
+                    <li><i class="fas fa-phone-alt"></i> (61) XXXXX-XXXX</li>
+                    <li><i class="fas fa-envelope"></i> cyberx123@gmail.com</li>
+                </ul>
+            </div>
+            <div class="footer-section footer-payment-methods">
+                <h3 class="footer-title">PAGAMENTO</h3>
+                <div class="payment-icons">
+                    <img src="https://pontospravoar.com/wp-content/uploads/2020/08/Cart%C3%A3o-Visa-Gold.png" alt="Visa">
+                    <img src="https://logodownload.org/wp-content/uploads/2016/10/mastercard-logo-1-1.png" alt="Mastercard">
+                    <img src="https://www.advocacianunes.com.br/wp-content/uploads/2022/04/logo-pix-icone-1024.png" alt="Pix">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/admin-logic.js"></script>
 </body>
 </html>

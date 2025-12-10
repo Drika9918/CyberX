@@ -95,7 +95,8 @@ async function getCurrentUserInfo() {
     const session = await getCurrentSession();
     
     if (!session) return null;
-    
+    if (!isLoginPage() && window.location.pathname.indexOf('cadastro.html') === -1) {
+
     return {
         id: session.user.id,
         email: session.user.email,
@@ -106,13 +107,14 @@ async function getCurrentUserInfo() {
         createdAt: session.profile?.created_at || session.user.created_at
     };
 }
-
+}
 /**
  * VERIFICAR SE É PÁGINA DE LOGIN
  */
 function isLoginPage() {
     const currentPath = window.location.pathname;
     return currentPath.includes('index.html') || 
+            currentPath.includes('cadastro.html') || // <--- cadastro 
            currentPath.endsWith('/') || 
            currentPath.includes('login');
 }
@@ -129,14 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Página protegida, verificando login...');
         initAuthCheck();
         
-        // Verificar se está logado (apenas para páginas protegidas)
-        setTimeout(async () => {
-            const session = await checkIfUserIsLogged();
-            if (!session) {
-                console.log('Usuário não logado em página protegida, redirecionando...');
-                window.location.href = 'index.html';
-            }
-        }, 500);
+      
     } else {
         console.log('Página de login, auth check desativado');
         // Na página de login, NÃO verificamos automaticamente

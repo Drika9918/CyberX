@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400..900&display=swap');
-/*bom dia */
+
 :root {
   /* Vermelhos */
   --red-50: #ffe5e5;
@@ -665,7 +665,7 @@ div {
   height: 70px; /* Reduzi de 80px para 70px */
   display: flex;
   align-items: center;
-  top: 19vw; /* Ajuste este valor se necessário */
+  top: 12vw; /* Ajuste este valor se necessário */
 }
 
 /* SOBREPOSIÇÃO ESCURA para melhor contraste com texto */
@@ -720,7 +720,6 @@ div {
   align-items: center;
   top: 0vw;
 }
-
 
 /* Linha de brilho no topo da barra */
 .product-bottom-bar::before {
@@ -1658,8 +1657,3 @@ div {
   }
 
 }
-
-
-
-
-

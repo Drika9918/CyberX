@@ -683,7 +683,7 @@ div {
 
 /* NOME DO PRODUTO (agora sobre a imagem) */
 .product-name-overlay {
-  top: 14vw;
+  top: 17vw;
   bottom: 0px;
   /* Acima da barra */
   left: 0;
@@ -1657,4 +1657,5 @@ div {
   }
 
 }
+
 

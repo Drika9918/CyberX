@@ -665,7 +665,7 @@ div {
   height: 70px; /* Reduzi de 80px para 70px */
   display: flex;
   align-items: center;
-  top: 16.6vw; /* Ajuste este valor se necessário */
+  top: 19vw; /* Ajuste este valor se necessário */
 }
 
 /* SOBREPOSIÇÃO ESCURA para melhor contraste com texto */
@@ -1657,4 +1657,5 @@ div {
   }
 
 }
+
 

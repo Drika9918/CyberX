@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos | CyberX ADM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin-style.css">
+    <style>
+        /* Estilos específicos desta página (Tabela) */
+        .product-list { margin-top: 30px; }
+        .product-item {
+            background-color: var(--black-soft);
+            border: 1px solid #333;
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: 0.3s;
+            border-left: 4px solid #333;
+            position: relative;
+        }
+        .product-item:hover {
+            border-left-color: var(--red-cyber);
+            transform: translateX(5px);
+        }
+        .prod-img { 
+            width: 80px; 
+            height: 80px; 
+            object-fit: contain; 
+            background: #fff; 
+            margin-right: 20px; 
+            border-radius: 4px; 
+        }
+        .prod-info h3 { color: var(--white); font-size: 1.1rem; margin-bottom: 5px; }
+        .prod-info span { color: var(--red-cyber); font-weight: bold; font-family: var(--font-mono); }
+        .prod-actions { margin-left: auto; display: flex; gap: 10px; }
+        .btn-small { padding: 8px 15px; font-size: 0.8rem; min-width: auto; }
+
+        /* Estilos do Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: var(--black-soft);
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid var(--red-cyber);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+        }
+
+        .modal-header h2 {
+            color: var(--white);
+            font-size: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--red-cyber);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close-modal:hover {
+            transform: scale(1.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--white);
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: #222;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: var(--white);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--red-cyber);
+            box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        .product-img-preview {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            background: #111;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            display: block;
+            border: 1px solid #333;
+            padding: 5px;
+        }
+
+        .default-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        .add-product-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--white);
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .add-product-btn:hover {
+            color: var(--red-cyber);
+            transform: translateX(5px);
+        }
+
+        .required-field::after {
+            content: " *";
+            color: var(--red-cyber);
+        }
+
+        .form-hint {
+            color: #666;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            font-family: var(--font-mono);
+        }
+
+        /* Tabs para características especiais */
+        .specs-tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .spec-tab {
+            background: #222;
+            border: 1px solid #333;
+            color: #888;
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .spec-tab.active {
+            background: var(--red-cyber);
+            color: white;
+            border-color: var(--red-cyber);
+        }
+
+        .specs-content {
+            display: none;
+        }
+
+        .specs-content.active {
+            display: block;
+        }
+
+        /* Campo para adicionar múltiplas imagens */
+        .image-upload-area {
+            border: 2px dashed #444;
+            padding: 20px;
+            text-align: center;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .image-upload-area:hover {
+            border-color: var(--red-cyber);
+            background: rgba(255, 0, 0, 0.05);
+        }
+
+        .image-upload-area i {
+            font-size: 2rem;
+            color: #666;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .additional-images {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .additional-image {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            background: #111;
+            border: 1px solid #333;
+        }
+
+        .remove-image {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--red-cyber);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: none;
+        }
+
+        .image-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .image-container:hover .remove-image {
+            display: block;
+        }
+
+        /* Estilo para produto excluído */
+        .product-item.deleting {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .product-item.deleting::after {
+            content: 'EXCLUINDO...';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--red-cyber);
+            font-weight: bold;
+            font-family: var(--font-mono);
+            z-index: 1;
+        }
+
+        /* Input de imagem melhorado */
+        .image-input-container {
+            position: relative;
+        }
+
+        .image-loading {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--red-cyber);
+            font-size: 0.8rem;
+            display: none;
+        }
+
+        .image-error {
+            color: #ff4444;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .img-placeholder {
+            background: linear-gradient(45deg, #222, #333);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 0.7rem;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="brand"><h2>CYBER<span>X</span></h2></div>
+        <div class="welcome-text">BEM VINDO <span>ADM</span></div>
+        <nav class="menu-nav">
+            <a href="admin-dashboard.html" class="menu-item"><i class="fas fa-chart-line"></i> <span>DASHBOARD</span></a>
+            <div class="submenu">
+                <a href="#" class="submenu-link">PENDENTE</a>
+                <a href="admin-vendas.html" class="submenu-link">COMPRADOS</a>
+            </div>
+            <a href="admin-produtos.html" class="menu-item active"><i class="fas fa-box"></i> <span>PRODUTOS</span></a>
+            <a href="#" class="menu-item"><i class="fas fa-users"></i> <span>USUARIOS</span></a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="#" class="menu-item"><i class="fas fa-bookmark"></i> <span>FAVORITO</span></a>
+            <a href="#" class="menu-item"><i class="fas fa-cog"></i> <span>PERFIL</span></a>
+            <a href="#" onclick="logout()" class="menu-item"><i class="fas fa-sign-out-alt"></i> <span>SAIR</span></a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="top-bar">
+            <i class="fas fa-search icon-btn"></i>
+            <i class="fas fa-user icon-btn"></i>
+            <i class="fas fa-shopping-cart icon-btn"></i>
+        </div>
+
+        <h1 class="page-title">PRODUTOS</h1>
+        <p style="color: #666; margin-bottom: 30px; text-transform: uppercase; font-size: 0.8rem;">
+            pergunta sempre se o CLIENTE OU ADM tem certeza
+        </p>
+
+        <!-- Botão para abrir modal de adicionar -->
+        <a href="#" class="add-product-btn" onclick="openAddModal()">
+            <i class="fas fa-plus" style="font-size: 1.5rem;"></i> ADICIONA
+        </a>
+
+        <div class="product-list" id="productListContainer">
+            <div class="product-item" data-product-id="1">
+                <img src="https://via.placeholder.com/150" class="prod-img" alt="Produto">
+                <div class="prod-info">
+                    <h3>TECLADO GAMER RGB</h3>
+                    <span>R$ 250,00</span>
+                </div>
+                <div class="prod-actions">
+                    <button class="btn btn-secondary btn-small" onclick="deleteProduct(1)"><i class="fas fa-trash"></i></button>
+                    <button class="btn btn-success btn-small" onclick="openEditModal(1)">EDITAR</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal de Adicionar Produto (COMPLETO) -->
+    <div id="addModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>ADICIONAR NOVO PRODUTO</h2>
+                <button class="close-modal" onclick="closeAddModal()">&times;</button>
+            </div>
+            
+            <form id="addProductForm">
+                <div class="form-group">
+                    <label for="addProductImage" class="required-field">IMAGEM PRINCIPAL</label>
+                    <div class="image-input-container">
+                        <img id="addProductImagePreview" src="" class="product-img-preview" alt="Preview da Imagem" 
+                             onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=Imagem+Não+Carregada'; this.classList.add('img-placeholder');">
+                        <div class="image-loading" id="addImageLoading">Carregando...</div>
+                    </div>
+                    <input type="url" id="addProductImage" name="productImage" 
+                           placeholder="https://exemplo.com/imagem.jpg" 
+                           oninput="updateImagePreview('addProductImage', 'addProductImagePreview', 'addImageLoading', 'addImageError')">
+                    <div class="image-error" id="addImageError">Não foi possível carregar a imagem. Verifique a URL.</div>
+                    <div class="form-hint">Cole uma URL direta de imagem (terminando em .jpg, .png, etc.)</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="addProductName" class="required-field">NOME DO PRODUTO</label>
+                    <input type="text" id="addProductName" name="productName" placeholder="Ex: Teclado Mecânico RGB 60%" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="addProductDescription" class="required-field">DESCRIÇÃO DETALHADA</label>
+                    <textarea id="addProductDescription" name="productDescription" placeholder="Descreva o produto com detalhes..." required></textarea>
+                    <div class="form-hint">Mínimo: 50 caracteres | Máximo: 2000 caracteres</div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="addProductPrice" class="required-field">PREÇO (R$)</label>
+                        <input type="number" id="addProductPrice" name="productPrice" step="0.01" min="0" placeholder="299.90" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="addProductOldPrice">PREÇO ANTIGO (R$)</label>
+                        <input type="number" id="addProductOldPrice" name="productOldPrice" step="0.01" min="0" placeholder="399.90 (opcional)">
+                        <div class="form-hint">Deixe em branco se não houver promoção</div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="addProductCategory" class="required-field">CATEGORIA</label>
+                        <select id="addProductCategory" name="productCategory" required>
+                            <option value="">Selecione uma categoria...</option>
+                            <option value="teclados">Teclados</option>
+                            <option value="mouses">Mouses</option>
+                            <option value="headsets">Headsets</option>
+                            <option value="monitores">Monitores</option>
+                            <option value="cadeiras">Cadeiras Gamer</option>
+                            <option value="mousepads">Mousepads</option>
+                            <option value="webcams">Webcams</option>
+                            <option value="microfones">Microfones</option>
+                            <option value="outros">Outros</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="addProductBrand" class="required-field">MARCA</label>
+                        <input type="text" id="addProductBrand" name="productBrand" placeholder="Ex: Redragon, Logitech, Razer" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="addProductStock" class="required-field">QUANTIDADE EM ESTOQUE</label>
+                        <input type="number" id="addProductStock" name="productStock" min="0" placeholder="0" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="addProductStatus" class="required-field">STATUS DO PRODUTO</label>
+                        <select id="addProductStatus" name="productStatus" required>
+                            <option value="ativo" selected>Ativo (disponível para venda)</option>
+                            <option value="inativo">Inativo (não visível)</option>
+                            <option value="esgotado">Esgotado (visível mas sem estoque)</option>
+                            <option value="pre-venda">Pré-venda</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Características Especiais -->
+                <div class="form-group full-width">
+                    <label>CARACTERÍSTICAS ESPECIAIS</label>
+                    <div class="specs-tabs">
+                        <div class="spec-tab active" onclick="switchSpecTab('specs-basic')">BÁSICO</div>
+                        <div class="spec-tab" onclick="switchSpecTab('specs-avancado')">AVANÇADO</div>
+                        <div class="spec-tab" onclick="switchSpecTab('specs-dimensoes')">DIMENSÕES</div>
+                    </div>
+                    
+                    <div id="specs-basic" class="specs-content active">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="addProductColor">COR PRINCIPAL</label>
+                                <input type="text" id="addProductColor" name="productColor" placeholder="Preto, Branco, RGB">
+                            </div>
+                            <div class="form-group">
+                                <label for="addProductMaterial">MATERIAL</label>
+                                <input type="text" id="addProductMaterial" name="productMaterial" placeholder="Plástico ABS, Alumínio">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="specs-avancado" class="specs-content">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="addProductWarranty">GARANTIA (meses)</label>
+                                <input type="number" id="addProductWarranty" name="productWarranty" min="0" placeholder="12">
+                            </div>
+                            <div class="form-group">
+                                <label for="addProductWeight">PESO (g)</label>
+                                <input type="number" id="addProductWeight" name="productWeight" min="0" placeholder="800">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="specs-dimensoes" class="specs-content">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="addProductLength">COMPRIMENTO (cm)</label>
+                                <input type="number" id="addProductLength" name="productLength" step="0.1" placeholder="36.5">
+                            </div>
+                            <div class="form-group">
+                                <label for="addProductWidth">LARGURA (cm)</label>
+                                <input type="number" id="addProductWidth" name="productWidth" step="0.1" placeholder="12.4">
+                            </div>
+                            <div class="form-group">
+                                <label for="addProductHeight">ALTURA (cm)</label>
+                                <input type="number" id="addProductHeight" name="productHeight" step="0.1" placeholder="3.2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tags para SEO -->
+                <div class="form-group full-width">
+                    <label for="addProductTags">TAGS (separadas por vírgula)</label>
+                    <input type="text" id="addProductTags" name="productTags" placeholder="gamer, rgb, mecanico, 60%, switches-azuis">
+                    <div class="form-hint">Palavras-chave para melhorar a busca no site</div>
+                </div>
+
+                <!-- Imagens Adicionais -->
+                <div class="form-group full-width">
+                    <label>IMAGENS ADICIONAIS (opcional)</label>
+                    <div class="image-upload-area" onclick="document.getElementById('additionalImagesInput').click()">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <div>Clique ou arraste imagens aqui</div>
+                        <div class="form-hint">Máximo: 5 imagens | Formatos: JPG, PNG</div>
+                    </div>
+                    <input type="file" id="additionalImagesInput" multiple accept="image/*" style="display: none;" onchange="handleAdditionalImages(this)">
+                    
+                    <div id="additionalImagesPreview" class="additional-images"></div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeAddModal()">CANCELAR</button>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-plus"></i> ADICIONAR PRODUTO
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Edição -->
+    <div id="editModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>EDITAR PRODUTO</h2>
+                <button class="close-modal" onclick="closeEditModal()">&times;</button>
+            </div>
+            
+            <form id="editProductForm">
+                <div class="form-group">
+                    <label for="productImage" class="required-field">IMAGEM DO PRODUTO</label>
+                    <div class="image-input-container">
+                        <img id="currentProductImage" src="" class="product-img-preview" alt="Imagem do Produto"
+                             onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=Imagem+Não+Carregada'; this.classList.add('img-placeholder');">
+                        <div class="image-loading" id="editImageLoading">Carregando...</div>
+                    </div>
+                    <input type="url" id="productImage" name="productImage" placeholder="URL da imagem..." required
+                           oninput="updateImagePreview('productImage', 'currentProductImage', 'editImageLoading', 'editImageError')">
+                    <div class="image-error" id="editImageError">Não foi possível carregar a imagem. Verifique a URL.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="productName" class="required-field">NOME DO PRODUTO</label>
+                    <input type="text" id="productName" name="productName" placeholder="Ex: Teclado Gamer RGB" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="productDescription" class="required-field">DESCRIÇÃO</label>
+                    <textarea id="productDescription" name="productDescription" placeholder="Descreva o produto..." required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productPrice" class="required-field">PREÇO (R$)</label>
+                        <input type="number" id="productPrice" name="productPrice" step="0.01" placeholder="0.00" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productCategory" class="required-field">CATEGORIA</label>
+                        <select id="productCategory" name="productCategory" required>
+                            <option value="">Selecione...</option>
+                            <option value="teclados">Teclados</option>
+                            <option value="mouses">Mouses</option>
+                            <option value="headsets">Headsets</option>
+                            <option value="monitores">Monitores</option>
+                            <option value="cadeiras">Cadeiras</option>
+                            <option value="acessorios">Acessórios</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productStock" class="required-field">ESTOQUE</label>
+                        <input type="number" id="productStock" name="productStock" placeholder="Quantidade" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productStatus" class="required-field">STATUS</label>
+                        <select id="productStatus" name="productStatus" required>
+                            <option value="ativo">Ativo</option>
+                            <option value="inativo">Inativo</option>
+                            <option value="esgotado">Esgotado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeEditModal()">CANCELAR</button>
+                    <button type="submit" class="btn btn-success">SALVAR ALTERAÇÕES</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer-admin-area">
+        <div class="footer-container">
+            <div class="footer-section footer-logo-social">
+                <a href="#" class="footer-logo"><img src="imagem/logo branca completa.png" alt="CyberX" class="footer-logo-img"></a>
+                <div class="social-icons">
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">INFORMAÇÕES</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Sobre Nós</a></li>
+                    <li><a href="#">Como Comprar</a></li>
+                    <li><a href="#">Segurança</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">ATENDIMENTO</h3>
+                <ul class="footer-contact">
+                    <li><i class="fas fa-phone-alt"></i> (61) XXXXX-XXXX</li>
+                    <li><i class="fas fa-envelope"></i> cyberx123@gmail.com</li>
+                </ul>
+            </div>
+            <div class="footer-section footer-payment-methods">
+                <h3 class="footer-title">PAGAMENTO</h3>
+                <div class="payment-icons">
+                    <img src="https://pontospravoar.com/wp-content/uploads/2020/08/Cart%C3%A3o-Visa-Gold.png" alt="Visa">
+                    <img src="https://logodownload.org/wp-content/uploads/2016/10/mastercard-logo-1-1.png" alt="Mastercard">
+                    <img src="https://www.advocacianunes.com.br/wp-content/uploads/2022/04/logo-pix-icone-1024.png" alt="Pix">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/admin-logic.js"></script>
+    
+    <script>
+      
+        // Função para testar se uma URL de imagem é válida
+        function testImageURL(url, callback) {
+            const img = new Image();
+            img.onload = function() {
+                callback(true);
+            };
+            img.onerror = function() {
+                callback(false);
+            };
+            img.src = url;
+            
+            // Timeout para URLs que não respondem
+            setTimeout(() => {
+                if (!img.complete) {
+                    callback(false);
+                }
+            }, 3000);
+        }
+
+        // Função para atualizar o preview da imagem
+        function updateImagePreview(inputId, previewId, loadingId, errorId) {
+            const input = document.getElementById(inputId);
+            const preview = document.getElementById(previewId);
+            const loading = document.getElementById(loadingId);
+            const error = document.getElementById(errorId);
+            
+            const url = input.value.trim();
+            
+            if (!url) {
+                preview.src = 'https://via.placeholder.com/150?text=Imagem+Principal';
+                preview.classList.add('img-placeholder');
+                error.style.display = 'none';
+                return;
+            }
+            
+            // Verificar se é uma URL válida
+            if (!isValidURL(url)) {
+                preview.src = 'https://via.placeholder.com/150?text=URL+Inválida';
+                preview.classList.add('img-placeholder');
+                error.style.display = 'block';
+                return;
+            }
+            
+            // Mostrar loading
+            loading.style.display = 'flex';
+            error.style.display = 'none';
+            preview.classList.remove('img-placeholder');
+            
+            // Testar a URL
+            testImageURL(url, function(success) {
+                loading.style.display = 'none';
+                
+                if (success) {
+                    preview.src = url;
+                    error.style.display = 'none';
+                } else {
+                    preview.src = 'https://via.placeholder.com/150?text=Imagem+Não+Carregada';
+                    preview.classList.add('img-placeholder');
+                    error.style.display = 'block';
+                }
+            });
+        }
+
+        // Função para validar URL
+        function isValidURL(string) {
+            try {
+                new URL(string);
+                return true;
+            } catch (_) {
+                return false;
+            }
+        }
+
+        // Função para abrir modal de adicionar
+        function openAddModal() {
+            resetAddForm();
+            document.getElementById('addModal').style.display = 'flex';
+        }
+
+        // Função para fechar modal de adicionar
+        function closeAddModal() {
+            if (confirm('Deseja realmente cancelar? As informações não salvas serão perdidas.')) {
+                document.getElementById('addModal').style.display = 'none';
+                additionalImages = [];
+            }
+        }
+
+        // Função para abrir modal de edição
+        function openEditModal(productId) {
+            currentProductId = productId;
+            
+            // Buscar dados do produto (simulação)
+            const productData = {
+                id: productId,
+                name: "TECLADO GAMER RGB",
+                price: 250.00,
+                description: "Teclado mecânico RGB com switches azuis",
+                image: "https://via.placeholder.com/150",
+                category: "teclados",
+                stock: 15,
+                status: "ativo"
+            };
+
+            // Preencher formulário
+            document.getElementById('productName').value = productData.name;
+            document.getElementById('productPrice').value = productData.price;
+            document.getElementById('productDescription').value = productData.description;
+            document.getElementById('productImage').value = productData.image;
+            document.getElementById('currentProductImage').src = productData.image;
+            document.getElementById('productCategory').value = productData.category;
+            document.getElementById('productStock').value = productData.stock;
+            document.getElementById('productStatus').value = productData.status;
+
+            // Mostrar modal
+            document.getElementById('editModal').style.display = 'flex';
+        }
+
+        // Função para fechar modal de edição
+        function closeEditModal() {
+            document.getElementById('editModal').style.display = 'none';
+            currentProductId = null;
+        }
+
+        // Fechar modais ao clicar fora
+        document.querySelectorAll('.modal-overlay').forEach(modal => {
+            modal.addEventListener('click', function(event) {
+                if (event.target === this) {
+                    if (this.id === 'addModal') {
+                        closeAddModal();
+                    } else {
+                        closeEditModal();
+                    }
+                }
+            });
+        });
+
+        // Fechar modais com ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                if (document.getElementById('addModal').style.display === 'flex') {
+                    closeAddModal();
+                } else if (document.getElementById('editModal').style.display === 'flex') {
+                    closeEditModal();
+                }
+            }
+        });
+
+        // Manipular envio do formulário de adicionar
+       document.getElementById('addProductForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    if (!validateAddForm()) return;
+
+    // Converter imagens adicionais (base64 -> file)
+    const filesList = additionalImagesFiles || [];
+
+    // Construir JSON specs
+    const specs = {
+        color: document.getElementById('addProductColor').value,
+        material: document.getElementById('addProductMaterial').value,
+        warranty: document.getElementById('addProductWarranty').value,
+        weight: document.getElementById('addProductWeight').value,
+        dimensions: {
+            length: document.getElementById('addProductLength').value,
+            width: document.getElementById('addProductWidth').value,
+            height: document.getElementById('addProductHeight').value
+        },
+        tags: document.getElementById('addProductTags').value.split(',').map(t => t.trim())
+    };
+
+    const productData = {
+        name: document.getElementById('addProductName').value,
+        description: document.getElementById('addProductDescription').value,
+        brand: document.getElementById('addProductBrand').value,
+        category: document.getElementById('addProductCategory').value,
+        price: parseFloat(document.getElementById('addProductPrice').value),
+        old_price: document.getElementById('addProductOldPrice').value || null,
+        stock: parseInt(document.getElementById('addProductStock').value),
+        image_url: document.getElementById('addProductImage').value,
+        is_featured: false,
+        specs
+    };
+
+    const { data, error } = await createProduct(productData, filesList);
+
+    if (error) {
+        alert("Erro ao adicionar: " + error.message);
+        return;
+    }
+
+    showNotification("Produto criado com sucesso!", "success");
+    closeAddModal();
+    fetchProducts();
+});
+
+
+        // Manipular envio do formulário de edição
+        document.getElementById('editProductForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const productId = currentProductId;
+
+    const productData = {
+        name: document.getElementById('productName').value,
+        description: document.getElementById('productDescription').value,
+        brand: document.getElementById('addProductBrand')?.value,
+        category: document.getElementById('productCategory').value,
+        price: parseFloat(document.getElementById('productPrice').value),
+        image_url: document.getElementById('productImage').value,
+        stock: parseInt(document.getElementById('productStock').value),
+    };
+
+    const { error } = await updateProduct(productId, productData);
+
+    if (error) return alert("Erro ao atualizar: " + error.message);
+
+    showNotification("Atualizado com sucesso!", "success");
+    closeEditModal();
+    fetchProducts();
+});
+
+
+        // Função para deletar produto - CORRIGIDA
+      async function deleteProduct(productId) {
+    if (!confirm("Tem certeza que deseja excluir este produto?")) return;
+
+    const { error } = await deleteProductSupabase(productId);
+
+    if (error) {
+        alert("Erro ao deletar: " + error.message);
+        return;
+    }
+
+    showNotification("Produto deletado!", "success");
+    fetchProducts();
+}
+
+
+        // Função para trocar tabs
+        function switchSpecTab(tabId) {
+            // Remover active de todas as tabs
+            document.querySelectorAll('.spec-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remover active de todos os conteúdos
+            document.querySelectorAll('.specs-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Adicionar active à tab clicada
+            document.querySelector(`[onclick="switchSpecTab('${tabId}')"]`).classList.add('active');
+            
+            // Mostrar conteúdo correspondente
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        // Função para lidar com imagens adicionais
+        function handleAdditionalImages(input) {
+            const files = input.files;
+            const preview = document.getElementById('additionalImagesPreview');
+            
+            if (files.length + additionalImages.length > 5) {
+                showNotification('Máximo de 5 imagens permitidas!', 'error');
+                return;
+            }
+            
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                
+                if (!file.type.match('image.*')) {
+                    continue;
+                }
+                
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    const imgData = e.target.result;
+                    additionalImages.push(imgData);
+                    
+                    const container = document.createElement('div');
+                    container.className = 'image-container';
+                    
+                    const img = document.createElement('img');
+                    img.src = imgData;
+                    img.className = 'additional-image';
+                    
+                    const removeBtn = document.createElement('button');
+                    removeBtn.className = 'remove-image';
+                    removeBtn.innerHTML = '×';
+                    removeBtn.onclick = function() {
+                        removeAdditionalImage(imgData);
+                    };
+                    
+                    container.appendChild(img);
+                    container.appendChild(removeBtn);
+                    preview.appendChild(container);
+                };
+                
+                reader.readAsDataURL(file);
+            }
+            
+            input.value = '';
+        }
+
+        function removeAdditionalImage(imgData) {
+            const index = additionalImages.indexOf(imgData);
+            if (index > -1) {
+                additionalImages.splice(index, 1);
+            }
+            
+            // Atualizar preview
+            const preview = document.getElementById('additionalImagesPreview');
+            preview.innerHTML = '';
+            
+            additionalImages.forEach(data => {
+                const container = document.createElement('div');
+                container.className = 'image-container';
+                
+                const img = document.createElement('img');
+                img.src = data;
+                img.className = 'additional-image';
+                
+                const removeBtn = document.createElement('button');
+                removeBtn.className = 'remove-image';
+                removeBtn.innerHTML = '×';
+                removeBtn.onclick = function() {
+                    removeAdditionalImage(data);
+                };
+                
+                container.appendChild(img);
+                container.appendChild(removeBtn);
+                preview.appendChild(container);
+            });
+        }
+
+        // Funções auxiliares
+        function validateAddForm() {
+            const name = document.getElementById('addProductName').value;
+            const price = document.getElementById('addProductPrice').value;
+            const category = document.getElementById('addProductCategory').value;
+            const stock = document.getElementById('addProductStock').value;
+            const image = document.getElementById('addProductImage').value;
+            const description = document.getElementById('addProductDescription').value;
+            const brand = document.getElementById('addProductBrand').value;
+            
+            if (!name || !price || !category || !stock || !image || !description || !brand) {
+                showNotification('Preencha todos os campos obrigatórios!', 'error');
+                return false;
+            }
+            
+            if (description.length < 50) {
+                showNotification('A descrição precisa ter pelo menos 50 caracteres', 'error');
+                return false;
+            }
+            
+            if (parseFloat(price) <= 0) {
+                showNotification('O preço deve ser maior que zero!', 'error');
+                return false;
+            }
+            
+            if (parseInt(stock) < 0) {
+                showNotification('O estoque não pode ser negativo!', 'error');
+                return false;
+            }
+            
+            return true;
+        }
+
+        function resetAddForm() {
+            document.getElementById('addProductForm').reset();
+            document.getElementById('addProductImagePreview').src = 'https://via.placeholder.com/150?text=Imagem+Principal';
+            document.getElementById('addProductImagePreview').classList.add('img-placeholder');
+            document.getElementById('additionalImagesPreview').innerHTML = '';
+            additionalImages = [];
+            
+            // Resetar tabs
+            switchSpecTab('specs-basic');
+        }
+
+        function generateSKU() {
+            const timestamp = Date.now().toString().slice(-6);
+            const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+            return `CYB-${timestamp}${random}`;
+        }
+
+        function addProductToList(productData) {
+            const productList = document.getElementById('productListContainer');
+            const productId = Date.now(); // ID único baseado no timestamp
+            
+            const productItem = document.createElement('div');
+            productItem.className = 'product-item';
+            productItem.dataset.productId = productId;
+            
+            productItem.innerHTML = `
+                <img src="${productData.image}" class="prod-img" alt="${productData.name}" 
+                     onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=Sem+Imagem'">
+                <div class="prod-info">
+                    <h3>${productData.name}</h3>
+                    <span>R$ ${productData.price.toFixed(2)}</span>
+                    <div style="font-size: 0.8rem; color: #666; margin-top: 5px;">
+                        Estoque: ${productData.stock} | ${productData.brand} | ${productData.status.toUpperCase()}
+                    </div>
+                </div>
+                <div class="prod-actions">
+                    <button class="btn btn-secondary btn-small" onclick="deleteProduct(${productId})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <button class="btn btn-success btn-small" onclick="openEditModal(${productId})">
+                        EDITAR
+                    </button>
+                </div>
+            `;
+            
+            productList.appendChild(productItem);
+        }
+
+        function updateProductInList(productId, data) {
+            const productElement = document.querySelector(`.product-item[data-product-id="${productId}"]`);
+            
+            if (productElement) {
+                // Atualizar imagem
+                const img = productElement.querySelector('.prod-img');
+                img.src = data.image;
+                img.onerror = function() {
+                    this.onerror = null;
+                    this.src = 'https://via.placeholder.com/150?text=Sem+Imagem';
+                };
+                
+                // Atualizar nome
+                const nameElement = productElement.querySelector('.prod-info h3');
+                nameElement.textContent = data.name;
+                
+                // Atualizar preço
+                const priceElement = productElement.querySelector('.prod-info span');
+                priceElement.textContent = `R$ ${data.price.toFixed(2)}`;
+                
+                // Atualizar informações extras
+                const extraInfo = productElement.querySelector('.prod-info div');
+                if (extraInfo) {
+                    extraInfo.innerHTML = `Estoque: ${data.stock} | ${data.category.toUpperCase()} | ${data.status.toUpperCase()}`;
+                }
+            }
+        }
+
+
+        function showNotification(message, type) {
+            // Remover notificações antigas
+            document.querySelectorAll('.notification').forEach(n => n.remove());
+            
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 25px;
+                background: ${type === 'success' ? '#2e7d32' : '#c62828'};
+                color: white;
+                border-radius: 4px;
+                z-index: 2000;
+                animation: slideIn 0.3s ease;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            `;
+            
+            notification.innerHTML = `
+                <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            // Garantir que o modal de adicionar tenha conteúdo inicial
+            resetAddForm();
+            
+            // Adicionar evento para fechar com ESC
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    if (document.getElementById('addModal').style.display === 'flex') {
+                        closeAddModal();
+                    } else if (document.getElementById('editModal').style.display === 'flex') {
+                        closeEditModal();
+                    }
+                }
+            });
+        });
+
+        // Adicionar estilos de animação
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOut {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+            
+            .img-placeholder::before {
+                content: attr(alt);
+                display: block;
+                text-align: center;
+                font-size: 0.8rem;
+                color: #666;
+                padding: 10px;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

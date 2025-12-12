@@ -671,7 +671,7 @@ div {
 /* SOBREPOSIÇÃO ESCURA para melhor contraste com texto */
 .image-overlay {
   position: absolute;
-  top: 0;
+  top: 19vw;
   left: 0;
   right: 0;
   bottom: 0;
@@ -683,7 +683,8 @@ div {
 
 /* NOME DO PRODUTO (agora sobre a imagem) */
 .product-name-overlay {
-  bottom: 100px;
+  top: 13vw;
+  bottom: 0px;
   /* Acima da barra */
   left: 0;
   right: 0;
@@ -719,6 +720,7 @@ div {
   align-items: center;
   top: 0vw;
 }
+
 
 /* Linha de brilho no topo da barra */
 .product-bottom-bar::before {
@@ -1656,6 +1658,7 @@ div {
   }
 
 }
+
 
 
 

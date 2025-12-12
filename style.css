@@ -665,7 +665,7 @@ div {
   height: 70px; /* Reduzi de 80px para 70px */
   display: flex;
   align-items: center;
-  top: 16.5vw; /* Ajuste este valor se necessário */
+  top: 16.6vw; /* Ajuste este valor se necessário */
 }
 
 /* SOBREPOSIÇÃO ESCURA para melhor contraste com texto */
@@ -718,7 +718,7 @@ div {
   height: 80px;
   display: flex;
   align-items: center;
-  top: 16.5vw;
+  top: 16.6vw;
 }
 
 /* Linha de brilho no topo da barra */
@@ -1657,3 +1657,4 @@ div {
   }
 
 }
+

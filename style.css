@@ -683,7 +683,6 @@ div {
 
 /* NOME DO PRODUTO (agora sobre a imagem) */
 .product-name-overlay {
-  position: absolute;
   bottom: 100px;
   /* Acima da barra */
   left: 0;
@@ -718,7 +717,7 @@ div {
   height: 80px;
   display: flex;
   align-items: center;
-  top: 16.6vw;
+  top: 0vw;
 }
 
 /* Linha de brilho no topo da barra */
@@ -1657,6 +1656,7 @@ div {
   }
 
 }
+
 
 
 

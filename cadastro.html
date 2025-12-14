@@ -13,9 +13,7 @@
 
 <body class="minimal-auth-page">
  <div id="backgroud">
-    <video loop autoplay muted>
-      <source src="imagem/rudo-surebrec-gachiakuta.3840x2160.mp4" type="video/mp4">
-    </video>
+    <img src="https://www.pixground.com/wp-content/uploads/2024/08/Japanese-Pagoda-Waterfall-Scenery-4K-Wallpaper-768x432.jpg" alt="">
   </div>
     <div class="center-container">
 
@@ -23,7 +21,7 @@
 
             <div class="card-header">
                 <h1 class="minimal-title">
-                    Criar Nova Conta<span class="red-dot">.</span>
+                    Criar Nova Conta<span class="red-dot"></span>
                 </h1>
                 <p class="login-link">Já é membro? <a href="index.html" class="link-blue">Faça Login</a></p>
             </div>
@@ -60,7 +58,6 @@
                         <input type="password" id="cadastro-senha" placeholder="Senha" required minlength="6"
                             class="minimal-input">
                         <button type="button" class="toggle-password" onclick="togglePassword('cadastro-senha')">
-
                             <i class="fas fa-eye"></i>
                         </button>
                     </div>
@@ -89,12 +86,16 @@
 
         </div>
     </div>        
-     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<!-- Scripts na ORDEM CORRETA -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <script src="js/supabase-config.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/cadastro.js"></script>
-    <script src="js/session.js"></script>
+<script type="module" src="js/supabase-config.js"></script> 
+
+<script type="module" src="js/auth.js"></script> 
+
+<script type="module" src="js/session.js"></script> 
+
+<script type="module" src="js/cadastro.js"></script>
   
     <script>
         // Função para alternar visibilidade da senha
@@ -114,6 +115,84 @@
             }
         }
     </script>
+        <script>
+    // Teste automático
+    setTimeout(() => {
+        console.log('🔍 VERIFICAÇÃO FINAL:');
+        console.log('signUpClient existe?', typeof window.signUpClient === 'function');
+        console.log('loginUser existe?', typeof window.loginUser === 'function');
+        
+        if (typeof window.signUpClient !== 'function') {
+            alert('ERRO: signUpClient não carregou! Recarregue a página.');
+        } else {
+            console.log('✅ Tudo OK!');
+        }
+    }, 2000);
+    </script>
+
+
+    <!-- Adicione isto ANTES do </body> -->
+<script>
+    // Função de teste para verificar se o pop-up funciona
+    window.testarPopup = function() {
+        console.log('🧪 Testando pop-up...');
+        
+        // Remover pop-ups anteriores
+        const oldPopup = document.querySelector('.success-popup-overlay');
+        if (oldPopup) oldPopup.remove();
+        
+        // Criar pop-up de teste
+        const overlay = document.createElement('div');
+        overlay.className = 'success-popup-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.background = 'rgba(0,0,0,0.8)';
+        overlay.style.display = 'flex';
+        overlay.style.alignItems = 'center';
+        overlay.style.justifyContent = 'center';
+        overlay.style.zIndex = '10000';
+        
+        const popup = document.createElement('div');
+        popup.innerHTML = `
+            <div style="background: white; padding: 30px; border-radius: 10px; color: black;">
+                <h2>TESTE DE POP-UP</h2>
+                <p>Se você está vendo isso, o JavaScript está funcionando!</p>
+                <button onclick="this.parentElement.parentElement.remove()" style="padding: 10px 20px; background: red; color: white; border: none; border-radius: 5px;">
+                    Fechar
+                </button>
+            </div>
+        `;
+        
+        overlay.appendChild(popup);
+        document.body.appendChild(overlay);
+        
+        console.log('✅ Pop-up de teste criado!');
+    };
+    
+    // Testar automaticamente após 2 segundos (opcional)
+    // setTimeout(() => testarPopup(), 2000);
+</script>
+<script>
+    // Teste rápido após 3 segundos
+    setTimeout(() => {
+        console.log('=== TESTE DE DEPENDÊNCIAS ===');
+        console.log('1. window.supabase:', window.supabase ? '✅ OK' : '❌ FALTANDO');
+        console.log('2. window.supabase.auth:', window.supabase?.auth ? '✅ OK' : '❌ FALTANDO');
+        console.log('3. window.signUpClient:', typeof window.signUpClient === 'function' ? '✅ OK' : '❌ FALTANDO');
+        console.log('4. document.getElementById:', typeof document.getElementById);
+        
+        // Teste do botão
+        const btn = document.querySelector('.btn-primary');
+        console.log('5. Botão encontrado:', btn ? '✅ OK' : '❌ FALTANDO');
+        
+        if (btn && typeof window.signUpClient === 'function') {
+            console.log('✅✅✅ TUDO PRONTO PARA CADASTRAR!');
+        }
+    }, 3000);
+</script>
 </body>
 
 </html>

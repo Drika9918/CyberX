@@ -250,7 +250,7 @@ function redirectBasedOnRole(role) {
     console.log('🔄 Redirecionando para role:', role);
     switch (role) {
         case 'admin':
-            window.location.href = 'admin-dashboard.html';
+            window.location.href = 'adm-desboard.html';
             break;
         case 'client':
             window.location.href = 'client-home.html';

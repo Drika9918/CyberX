@@ -22,74 +22,114 @@ if (typeof supabase === 'undefined') {
 /**
  * CADASTRAR CLIENTE - FUNCIONANDO 100%
  */
+/**
+ * CADASTRAR CLIENTE - VERSÃO CORRIGIDA RLS
+ */
+/**
+ * CADASTRAR CLIENTE (CORRIGIDO)
+ */
 async function signUpClient(email, password, fullName, username) {
     try {
-        console.log('📝 Iniciando cadastro para:', username);
-        
-        // 1. VALIDAÇÕES BÁSICAS
-        if (email.toLowerCase().includes('admin@admin.com')) {
-            throw new Error('Este email é reservado para administradores');
-        }
-        if (password.length < 6) {
-            throw new Error('A senha deve ter pelo menos 6 caracteres');
-        }
+        console.log('📝 Tentando cadastrar:', email);
 
-        // 2. CADASTRO NO SUPABASE AUTH
         const { data, error } = await supabase.auth.signUp({
-            email: email.trim(),
+            email: email,
             password: password,
             options: {
                 data: {
-                    full_name: fullName.trim(),
-                    username: username.trim()
-                },
-                emailRedirectTo: window.location.origin + 'index.html'
+                    full_name: fullName,
+                    username: username,
+                    role: 'client',
+                    email_verified: true // Força o metadado para o Trigger
+                }
             }
         });
 
-        if (error) {
-            console.error('❌ Erro do Supabase:', error);
-            
-            if (error.message.includes('already registered')) {
-                throw new Error('Este email já está cadastrado. Faça login.');
-            }
-            throw new Error(error.message);
+        if (error) throw error;
+
+        // SE O LOGIN FOR AUTOMÁTICO (Opção 1 ativada no painel)
+        if (data.session) {
+            console.log('✅ Cadastro e Login automáticos realizados!');
+            return { 
+                success: true, 
+                message: 'Cadastro realizado com sucesso!',
+                user: data.user
+            };
+        } 
+        
+        // SE AINDA PRECISAR DE EMAIL (Opção 2 - SMTP)
+        if (data.user && !data.session) {
+            return {
+                success: true,
+                message: 'Cadastro realizado! Verifique seu email (pode levar 1 min).'
+            };
         }
-
-        console.log('✅ Usuário criado no Auth:', data.user?.id);
-
-        // 3. CRIAR PERFIL NA TABELA PROFILES
-        if (data.user) {
-            const { error: profileError } = await supabase
-                .from('profiles')
-                .insert({
-                    id: data.user.id,
-                    role: 'client',
-                    full_name: fullName.trim(),
-                    username: username.trim(),
-                    is_admin: false,      // Cliente NUNCA é admin
-                    email_verified: false, // Ainda não confirmou email
-                    is_active: true
-                });
-
-            if (profileError) {
-                console.warn('⚠️ Erro ao criar perfil:', profileError);
-                // Não falha o cadastro, usuário pode atualizar depois
-            }
-        }
-
-        return {
-            success: true,
-            message: '🎉 Cadastro realizado! Verifique seu email para confirmar.',
-            userId: data.user?.id
-        };
 
     } catch (error) {
-        console.error('❌ Erro completo no cadastro:', error);
-        return {
-            success: false,
-            message: error.message || 'Erro desconhecido no cadastro'
+        console.error('❌ Erro no cadastro:', error.message);
+        return { 
+            success: false, 
+            message: error.message 
         };
+    }
+}
+
+/**
+ * LOGIN DE USUÁRIO (CORRIGIDO)
+ */
+async function loginUser(email, password) {
+    try {
+        console.log('🔐 Tentando logar:', email);
+
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email: email,
+            password: password
+        });
+
+        if (error) {
+            // Traduzindo erros comuns do Supabase
+            if (error.message.includes('Invalid login credentials')) {
+                throw new Error('E-mail ou senha incorretos.');
+            }
+            if (error.message.includes('Email not confirmed')) {
+                throw new Error('Você precisa confirmar seu e-mail antes de entrar.');
+            }
+            throw error;
+        }
+
+        console.log('✅ Login realizado:', data.user);
+        
+        // Redireciona com base no banco de dados (profiles)
+        await checkUserRoleAndRedirect(data.user.id);
+        
+        return { success: true };
+
+    } catch (error) {
+        console.error('❌ Erro no login:', error.message);
+        return { success: false, message: error.message };
+    }
+}
+
+// Função auxiliar para redirecionamento
+async function checkUserRoleAndRedirect(userId) {
+    // Busca a role na tabela profiles
+    const { data: profile, error } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', userId)
+        .single();
+
+    if (error) {
+        console.error('Erro ao buscar perfil:', error);
+        window.location.href = 'index.html'; // Fallback
+        return;
+    }
+
+    // Lógica de redirecionamento
+    if (profile.role === 'admin') {
+        window.location.href = 'adm-desboard.html';
+    } else {
+        window.location.href = 'client-home.html';
     }
 }
 

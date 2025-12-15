@@ -45,7 +45,7 @@ function showSuccessPopup(username, email) {
                 
                 <p style="margin: 10px 0; color: #AAAAAA;">
                     Bem-vindo(a), 
-                    <span style="color: #FF2A2A; font-weight: bold;">@${username}</span>! 🎉
+                    <span style="color: #2E6F40; font-weight: bold;">@${username}</span>! 🎉
                 </p>
                 
                 <p style="margin: 15px 0; color: #AAAAAA;">
@@ -368,3 +368,4 @@ setTimeout(() => {
         showMessage('Usando modo de teste. Recarregue para modo real.', 'warning');
     }
 }, 10000);
+

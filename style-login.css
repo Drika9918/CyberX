@@ -65,7 +65,7 @@ body {
     margin: 0;
 }
 
-#backgroud video {
+#backgroud img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -881,304 +881,110 @@ body {
 
 
  /* ============================================
-   RESPONSIVIDADE MOBILE - ANDROID & iOS SAFARI
+   RESPONSIVIDADE MOBILE APENAS (Android & iPhone)
    ============================================ */
 
-/* CORREÇÕES GERAIS PARA MOBILE */
-@media (max-width: 768px) {
-  /* CORREÇÃO PARA ALTURA NO iOS SAFARI */
-  .auth-page,
-  .login-layout-split,
-  .left-scanner-section,
-  .right-login-content {
-    min-height: -webkit-fill-available;
-    height: -webkit-fill-available;
-  }
-  
-  /* LAYOUT MOBILE - UMA COLUNA APENAS */
+/* APENAS PARA DISPOSITIVOS COM ATÉ 768px DE LARGURA */
+@media screen and (max-width: 768px) {
+  /* MANTÉM A ESTRUTURA DO GRID MAS OCULTA A LOGO */
   .login-layout-split {
     grid-template-columns: 1fr !important;
-    grid-template-rows: 1fr !important;
+    grid-template-rows: 0fr 1fr !important;
   }
   
-  /* OCULTAR LOGO EM MOBILE */
+  /* OCULTA A SEÇÃO DA LOGO COMPLETAMENTE */
   .left-scanner-section {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
     height: 0 !important;
     min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
   
-  /* FORMULÁRIO OCUPA TELA INTEIRA */
+  /* FORMULÁRIO OCUPA TODA A TELA */
   .right-login-content {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
     width: 100vw !important;
     height: 100vh !important;
-    height: -webkit-fill-available !important;
+    min-height: 100vh !important;
     padding: 1rem !important;
     background: rgba(0, 0, 0, 0.95) !important;
-    align-items: center !important;
-    justify-content: center !important;
   }
   
-  /* CARD OTIMIZADO PARA MOBILE */
+  /* CARD RESPONSIVO */
   .card-login {
     width: 95% !important;
     max-width: 95% !important;
-    padding: 2.5rem 1.5rem !important;
     margin: 0 auto !important;
-    border-radius: 16px !important;
-    background: rgba(12, 10, 10, 0.9) !important;
-    box-shadow: 
-      0 20px 60px rgba(0, 0, 0, 0.6),
-      0 0 0 1px rgba(215, 68, 68, 0.1) !important;
-  }
-  
-  /* TÍTULO OTIMIZADO */
-  .login-title.text-shimmer {
-    font-size: 2rem !important;
-    margin-bottom: 2rem !important;
-    letter-spacing: 2px !important;
-    -webkit-font-smoothing: antialiased;
-  }
-  
-  /* FORMULÁRIO MAIS COMPACTO */
-  .login-form {
-    gap: 1.8rem !important;
-  }
-  
-  /* INPUTS MAIORES PARA TOUCH */
-  .field input[type="email"],
-  .field input[type="password"] {
-    height: 52px !important;
-    font-size: 16px !important; /* PREVINE ZOOM NO iOS */
-  }
-  
-  /* BOTÃO MAIOR PARA TOUCH */
-  .btn-login {
-    height: 54px !important;
-    font-size: 16px !important;
-    margin-top: 1.5rem !important;
-  }
-  
-  /* MELHORIAS DE TOUCH */
-  .btn-login,
-  .forgot-password a,
-  .switch-link a {
-    min-height: 44px;
-    -webkit-tap-highlight-color: transparent;
-    user-select: none;
-  }
-  
-  /* OCULTAR ELEMENTOS DA LOGO */
-  .final-logo-position,
-  .floating-shadow {
-    display: none !important;
   }
 }
 
 /* MOBILE PEQUENO (até 480px) */
-@media (max-width: 480px) {
+@media screen and (max-width: 480px) {
   .card-login {
-    padding: 2rem 1.25rem !important;
-    border-radius: 14px !important;
+    padding: 2rem 1.5rem !important;
     width: 98% !important;
   }
   
-  .login-title.text-shimmer {
-    font-size: 1.7rem !important;
-    margin-bottom: 1.5rem !important;
-  }
-  
-  .field input[type="email"],
-  .field input[type="password"] {
-    height: 50px !important;
-  }
-  
-  .btn-login {
-    height: 52px !important;
+  .login-title {
+    font-size: 1.8rem !important;
   }
 }
 
 /* MOBILE MUITO PEQUENO (até 360px) */
-@media (max-width: 360px) {
+@media screen and (max-width: 360px) {
   .card-login {
-    padding: 1.75rem 1rem !important;
+    padding: 1.75rem 1.25rem !important;
   }
   
-  .login-title.text-shimmer {
-    font-size: 1.5rem !important;
-  }
-  
-  .field input[type="email"],
-  .field input[type="password"] {
-    height: 48px !important;
-    font-size: 15px !important;
-  }
-  
-  .btn-login {
-    height: 50px !important;
-    font-size: 15px !important;
+  .login-title {
+    font-size: 1.6rem !important;
   }
 }
 
-/* ORIENTAÇÃO LANDSCAPE (horizontal) */
-@media (max-height: 600px) and (orientation: landscape) {
-  .login-layout-split {
-    grid-template-columns: 1fr !important;
-    grid-template-rows: 1fr !important;
-  }
-  
-  .left-scanner-section {
-    display: none !important;
-  }
-  
-  .right-login-content {
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
-  
+/* LANDSCAPE (orientação horizontal) */
+@media screen and (max-height: 600px) and (orientation: landscape) and (max-width: 768px) {
   .card-login {
-    margin: 1rem auto !important;
     padding: 1.5rem !important;
-  }
-  
-  .login-form {
-    gap: 1.2rem !important;
-  }
-  
-  .field input[type="email"],
-  .field input[type="password"] {
-    height: 46px !important;
-  }
-  
-  .btn-login {
-    height: 48px !important;
+    margin: 0.5rem auto !important;
   }
 }
 
 /* ============================================
-   CORREÇÕES ESPECÍFICAS PARA SAFARI iOS
+   CORREÇÕES ESPECÍFICAS PARA iOS SAFARI
    ============================================ */
 @supports (-webkit-touch-callout: none) {
-  /* Só aplica no Safari iOS */
-  .auth-page {
-    min-height: -webkit-fill-available;
+  /* CORREÇÃO DE ALTURA NO SAFARI iOS */
+  @media screen and (max-width: 768px) {
+    .auth-page,
+    .right-login-content {
+      height: -webkit-fill-available !important;
+      min-height: -webkit-fill-available !important;
+    }
   }
   
-  /* Prevenir zoom automático em inputs no iOS */
-  @media (max-width: 768px) {
+  /* PREVENIR ZOOM EM INPUTS */
+  @media screen and (max-width: 768px) {
     input[type="email"],
     input[type="password"] {
       font-size: 16px !important;
-      -webkit-appearance: none;
     }
-  }
-  
-  /* Correção para autofill no iOS */
-  .field input:-webkit-autofill {
-    -webkit-text-fill-color: #ffffff !important;
-    transition: background-color 5000s ease-in-out 0s;
   }
 }
 
 /* ============================================
-   SAFE AREAS - PARA iPHONES COM NOTCH
+   SAFE AREAS PARA iPHONES COM NOTCH
    ============================================ */
 @supports (padding: max(0px)) {
-  .right-login-content {
-    padding-left: max(1rem, env(safe-area-inset-left)) !important;
-    padding-right: max(1rem, env(safe-area-inset-right)) !important;
-    padding-top: max(1rem, env(safe-area-inset-top)) !important;
-    padding-bottom: max(1rem, env(safe-area-inset-bottom)) !important;
-  }
-  
-  .auth-page {
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-}
-
-/* ============================================
-   CORREÇÕES PARA ANDROID/CHROME
-   ============================================ */
-@supports not (-webkit-touch-callout: none) {
-  /* Só aplica em navegadores não-iOS (Android) */
-  @media (max-width: 768px) {
+  @media screen and (max-width: 768px) {
     .right-login-content {
-      background: rgba(0, 0, 0, 0.98) !important;
+      padding-left: max(1rem, env(safe-area-inset-left)) !important;
+      padding-right: max(1rem, env(safe-area-inset-right)) !important;
+      padding-top: max(1rem, env(safe-area-inset-top)) !important;
+      padding-bottom: max(1rem, env(safe-area-inset-bottom)) !important;
     }
-  }
-}
-
-/* ============================================
-   PERFORMANCE EM MOBILE
-   ============================================ */
-@media (max-width: 768px) {
-  /* REDUZIR ANIMAÇÕES PARA PERFORMANCE */
-  .text-shimmer {
-    --shimmer-speed: 5s !important;
-  }
-  
-  .logoFloat {
-    animation-duration: 8s !important;
-  }
-  
-  /* DESATIVAR HOVER EM DISPOSITIVOS TOUCH */
-  @media (hover: none) and (pointer: coarse) {
-    .btn-login:hover {
-      transform: none !important;
-    }
-    
-    .card-login:hover {
-      transform: none !important;
-    }
-    
-    /* FEEDBACK TÁTIL PARA BOTÕES */
-    .btn-login:active {
-      transform: scale(0.98) !important;
-    }
-  }
-}
-
-/* ============================================
-   ACESSIBILIDADE - REDUÇÃO DE MOVIMENTO
-   ============================================ */
-@media (prefers-reduced-motion: reduce) {
-  .text-shimmer,
-  .logoFloat,
-  .btn-login::after,
-  .input-underline {
-    animation: none !important;
-    transition: none !important;
-  }
-  
-  .text-shimmer {
-    background-size: 100% 100% !important;
-    background-position: 0 0 !important;
-  }
-}
-
-/* ============================================
-   DISPOSITIVOS COM ALTURA MUITO PEQUENA
-   ============================================ */
-@media (max-height: 500px) {
-  .right-login-content {
-    align-items: flex-start !important;
-    padding-top: 0.5rem !important;
-    overflow-y: auto !important;
-  }
-  
-  .card-login {
-    margin-top: 0.5rem !important;
-    margin-bottom: 0.5rem !important;
-    padding: 1.5rem !important;
-  }
-  
-  .login-title.text-shimmer {
-    font-size: 1.4rem !important;
-    margin-bottom: 1rem !important;
-  }
-  
-  .login-form {
-    gap: 1rem !important;
   }
 }

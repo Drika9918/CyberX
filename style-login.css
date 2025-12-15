@@ -1,58 +1,60 @@
 /* ============================================
    TELA DE LOGIN - ESTÉTICA JAPONESA DARK
    ============================================ */
-@import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400..900&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400..900&display=swap');
 
 
 /* VARIÁVEIS CSS - TONS JAPONESES DARK */
 :root {
-  /* 🎨 PALETA JAPONESA DARK */
-  --color-black: #000000;
-  --color-white: #ffffff;
-  --color-red-jp: #D74444;
-  /* Vermelho japonês */
-  --color-red-dark: #C61111;
-  /* Vermelho escuro */
-  --color-red-light: #FF2A2A;
-  /* Vermelho claro */
-  --color-gray-very-light: #e0e0e0;
-  /* Para linhas dos inputs */
-  --color-gray-dark: #111111;
-  /* Para botão */
-  --color-gray-medium: #888888;
-  /* Para textos secundários */
+    /* 🎨 PALETA JAPONESA DARK */
+    --color-black: #000000;
+    --color-white: #ffffff;
+    --color-red-jp: #D74444;
+    /* Vermelho japonês */
+    --color-red-dark: #C61111;
+    /* Vermelho escuro */
+    --color-red-light: #FF2A2A;
+    /* Vermelho claro */
+    --color-gray-very-light: #e0e0e0;
+    /* Para linhas dos inputs */
+    --color-gray-dark: #111111;
+    /* Para botão */
+    --color-gray-medium: #888888;
+    /* Para textos secundários */
 
-  /* 📐 MEDIDAS */
-  --border-radius-card: 12px;
-  /* Bordas do card */
-  --border-radius-pill: 50px;
-  /* Botão pill */
-  --border-radius-input: 0;
-  /* Inputs sem borda */
-  --card-max-width: 380rem;
-  /* Largura máxima do card - CORRIGIDO: rem para px */
-  --input-height: 48px;
-  /* Altura dos inputs */
+    /* 📐 MEDIDAS */
+    --border-radius-card: 12px;
+    /* Bordas do card */
+    --border-radius-pill: 50px;
+    /* Botão pill */
+    --border-radius-input: 0;
+    /* Inputs sem borda */
+    --card-max-width: 380rem;
+    /* Largura máxima do card */
+    --input-height: 48px;
+    /* Altura dos inputs */
 }
 
 /* RESET E BASE */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html,
 body {
-  height: 100%;
-  width: 100%;
+    height: 100%;
+    width: 100%;
   font-family: 'tektur', sans-serif;
-  /* Mantido como estava */
-  color: var(--color-white);
-  overflow-x: hidden;
+    background: var(--color-white);
+    color: var(--color-white);
+    overflow-x: hidden;
 }
 
-/* background - TYPO corrigido: #backgroud para #background */
+/* IMPORTAR FONTE INTER */
+
+
 #backgroud {
     position: fixed;
     inset: 0;
@@ -78,34 +80,31 @@ body {
     height: inherit;
     position: fixed;
     inset: 0;
-    background: linear-gradient(109deg, rgba(12, 12, 12, 0.747) 15%, rgba(5, 5, 5, 0.3) 59%, rgba(16, 10, 10, 0.99) 105%);
+    background: linear-gradient(109deg, rgba(10, 12, 16, 0.99) 15%, rgba(10, 12, 16, 0.3) 59%, rgba(10, 12, 16, 0.99) 105%);
 
 
 }
-
-
-
 
 /* ============================================
    LAYOUT PRINCIPAL - 2 COLUNAS (35% / 65%)
    ============================================ */
 
 .auth-page {
-  min-height: 100vh;
-   background-color: #0000009d;
-  backdrop-filter: blur(80px);
-  position: relative;
-  color: var(--color-white);
-  overflow: hidden;
+    min-height: 100vh;
+    background: rgb(0, 0, 0);
+    backdrop-filter: blur(1px);
+    position: relative;
+    color: var(--color-white);
+    overflow: hidden;
 }
 
 /* GRID DE DUAS COLUNAS 35% ESQUERDA, 65% DIREITA */
 .login-layout-split {
-  display: grid;
-  grid-template-columns: 35% 65%;
-  height: 100vh;
+    display: grid;
+    grid-template-columns: 35% 65%;
+    height: 100vh;
 
-  width: 100%;
+    width: 100%;
 }
 
 /* ============================================
@@ -113,63 +112,60 @@ body {
    ============================================ */
 
 .left-scanner-section {
-  position: relative;
-  overflow-x: hidden;
-  background-color: #0000003f;
-  backdrop-filter: blur(4px);
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* IMAGEM DE FUNDO - REMOVIDA PARA FICAR APENAS PRETO */
 .bg-image {
-  display: none;
-  /* Remover imagem de fundo */
+    display: none;
+    /* Remover imagem de fundo */
 }
 
 /* LOGO FINAL - POSICIONADA NO CENTRO */
 .final-logo-position {
-  position: relative !important;
-  width: 280rem;
-  /* CORRIGIDO: 280rem para 280px */
-  height: auto;
-  z-index: 3;
-  right: auto !important;
-  top: auto !important;
-  transform: none !important;
-  filter: drop-shadow(0 0 30px rgba(215, 68, 68, 0.4)) !important;
-  animation: logoFloat 6s ease-in-out infinite;
+    position: relative !important;
+    width: 280rem;
+    height: auto;
+    z-index: 3;
+    right: auto !important;
+    top: auto !important;
+    transform: none !important;
+    filter: drop-shadow(0 0 30px rgba(215, 68, 68, 0.4)) !important;
+    animation: logoFloat 6s ease-in-out infinite;
 }
 
 @keyframes logoFloat {
 
-  0%,
-  100% {
-    transform: scale(1) rotate(0deg);
-  }
+    0%,
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
 
-  25% {
-    transform: scale(1.05) rotate(-1deg);
-  }
+    25% {
+        transform: scale(1.05) rotate(-1deg);
+    }
 
-  75% {
-    transform: scale(1.05) rotate(1deg);
-  }
+    75% {
+        transform: scale(1.05) rotate(1deg);
+    }
 }
 
 .floating-shadow {
-  position: absolute;
-  width: 30rem;
-  height: 20px;
-  background: rgba(215, 68, 68, 0.15);
-  bottom: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  border-radius: 50%;
-  filter: blur(15px);
+    position: absolute;
+    width: 30rem;
+    height: 20px;
+    background: rgba(215, 68, 68, 0.15);
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    border-radius: 50%;
+    filter: blur(15px);
 }
 
 /* ============================================
@@ -177,13 +173,13 @@ body {
    ============================================ */
 
 .right-login-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  background: rgba(0, 0, 0, 0.205);
-  position: relative;
-  z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: transparent;
+    position: relative;
+    z-index: 2;
 }
 
 /* ============================================
@@ -191,54 +187,54 @@ body {
    ============================================ */
 
 .right-login-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  position: relative;
-  z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+    z-index: 2;
 
 
 }
 
 /* CARD DE LOGIN - BRANCO MINIMALISTA */
 .card-login {
-  width: 90%;
-  max-width: var(--card-max-width);
-  padding: 4rem 3rem;
-  position: relative;
-  background: rgba(12, 10, 10, 0.25) !important;
+    width: 90%;
+    max-width: var(--card-max-width);
+    padding: 4rem 3rem;
+    position: relative;
+    background: rgba(12, 10, 10, 0.25) !important;
   backdrop-filter: blur(10px) saturate(180%) !important;
-  border-radius: var(--border-radius-card) !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08) !important;
+    border-radius: var(--border-radius-card) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08) !important;
 }
 
 /* REMOVER EFEITOS GLASSMORPHISM ANTIGOS */
 .cinematic-card::before {
-  display: none;
+    display: none;
 }
 
 /* ============================================
    EFEITO "VÍDEO DARK" DENTRO DO TEXTO
    ============================================ */
 .login-title {
-  font-size: 2.8rem;
-  font-weight: 700;
-  margin-bottom: 2.5rem;
-  text-align: center;
-  letter-spacing: 3px;
-  text-transform: uppercase;
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    text-align: center;
+    letter-spacing: 3px;
+    text-transform: uppercase;
 
-  /* Texto base invisível */
-  color: transparent !important;
+    /* Texto base invisível */
+    color: transparent !important;
 
-  display: block;
-  /* ⚠️ CORRIGIDO: muda para block */
-  width: 100%;
-  /* Garante largura total */
-  overflow: hidden;
-  position: relative;
-  /* Necessário para o efeito ::before */
+    display: block;
+    /* ⚠️ CORRIGIDO: muda para block */
+    width: 100%;
+    /* Garante largura total */
+    overflow: hidden;
+    position: relative;
+    /* Necessário para o efeito ::before */
 }
 
 /* ============================================
@@ -252,16 +248,18 @@ body {
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
-
+  
   /* Gradiente que vai se mover */
-  background-image: linear-gradient(90deg,
-      var(--shimmer-color-1, #4a0b12) 0%,
-      var(--shimmer-color-2, #D74444) 45%,
-      var(--shimmer-color-3, #550606) 100%);
-
+  background-image: linear-gradient(
+    90deg,
+    var(--shimmer-color-1, #4a0b12) 0%,
+    var(--shimmer-color-2, #D74444) 45%,
+    var(--shimmer-color-3, #550606) 100%
+  );
+  
   background-size: 200% 100%;
   background-position: 200% 0;
-
+  
   /* Animação do brilho */
   animation: shimmerMove var(--shimmer-speed, 1.2s) linear infinite;
 }
@@ -271,7 +269,6 @@ body {
   0% {
     background-position: 200% 0;
   }
-
   100% {
     background-position: -200% 0;
   }
@@ -281,45 +278,33 @@ body {
 
 /* Vermelho (padrão do seu site) */
 .text-shimmer-red {
-  --shimmer-color-1: #4a0b12;
-  /* Vermelho muito escuro */
-  --shimmer-color-2: #D74444;
-  /* Vermelho japonês */
-  --shimmer-color-3: #5e050f;
-  /* Vermelho muito escuro */
+  --shimmer-color-1: #4a0b12;    /* Vermelho muito escuro */
+  --shimmer-color-2: #D74444;    /* Vermelho japonês */
+  --shimmer-color-3: #5e050f;    /* Vermelho muito escuro */
   --shimmer-speed: 4s;
 }
 
 /* Azul (como no exemplo que você mostrou) */
 .text-shimmer-blue {
-  --shimmer-color-1: #1e3a8a;
-  /* Azul escuro */
-  --shimmer-color-2: #3b82f6;
-  /* Azul médio */
-  --shimmer-color-3: #1e3a8a;
-  /* Azul escuro */
+  --shimmer-color-1: #1e3a8a;    /* Azul escuro */
+  --shimmer-color-2: #3b82f6;    /* Azul médio */
+  --shimmer-color-3: #1e3a8a;    /* Azul escuro */
   --shimmer-speed: 1.2s;
 }
 
 /* Roxo escuro */
 .text-shimmer-purple {
-  --shimmer-color-1: #1e1b4b;
-  /* Roxo muito escuro */
-  --shimmer-color-2: #3730a3;
-  /* Roxo médio */
-  --shimmer-color-3: #1e1b4b;
-  /* Roxo muito escuro */
+  --shimmer-color-1: #1e1b4b;    /* Roxo muito escuro */
+  --shimmer-color-2: #3730a3;    /* Roxo médio */
+  --shimmer-color-3: #1e1b4b;    /* Roxo muito escuro */
   --shimmer-speed: 1.5s;
 }
 
 /* Verde */
 .text-shimmer-green {
-  --shimmer-color-1: #064e3b;
-  /* Verde muito escuro */
-  --shimmer-color-2: #10b981;
-  /* Verde médio */
-  --shimmer-color-3: #064e3b;
-  /* Verde muito escuro */
+  --shimmer-color-1: #064e3b;    /* Verde muito escuro */
+  --shimmer-color-2: #10b981;    /* Verde médio */
+  --shimmer-color-3: #064e3b;    /* Verde muito escuro */
   --shimmer-speed: 1.8s;
 }
 
@@ -333,7 +318,7 @@ body {
   display: block;
   width: 100%;
   margin-bottom: 2.5rem;
-
+  
   /* Sombra para destacar mais */
 
 }
@@ -358,10 +343,12 @@ body {
   left: -100%;
   width: 50%;
   height: 100%;
-  background: linear-gradient(90deg,
-      transparent,
-      rgba(255, 255, 255, 0.3),
-      transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
   animation: btnShine 9s infinite;
 }
 
@@ -369,7 +356,6 @@ body {
   0% {
     left: -100%;
   }
-
   100% {
     left: 200%;
   }
@@ -380,7 +366,7 @@ body {
   .text-shimmer {
     --shimmer-speed: calc(var(--shimmer-speed, 1.2s) * 1.3);
   }
-
+  
   .login-title.text-shimmer {
     font-size: 2rem;
   }
@@ -391,26 +377,26 @@ body {
 
 /* SOMBRA EXTERNA PARA DESTAQUE */
 .login-title {
-  text-shadow:
-    0 0 15px rgba(139, 0, 0, 0.3),
-    0 0 5px rgba(0, 0, 0, 0.5);
-  filter: drop-shadow(0 0 8px rgba(102, 0, 0, 0.2));
+    text-shadow:
+        0 0 15px rgba(139, 0, 0, 0.3),
+        0 0 5px rgba(0, 0, 0, 0.5);
+    filter: drop-shadow(0 0 8px rgba(102, 0, 0, 0.2));
 }
 
 /* MELHORAR PERFORMANCE EM DISPOSITIVOS MÓVEIS */
 .login-title {
-  /* Otimizar para GPU */
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  -webkit-font-smoothing: antialiased;
+    /* Otimizar para GPU */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
 }
 
 /* 1. REFINAMENTO DO FUNDO DO CARD */
 .card-login {
-
+ 
   -webkit-backdrop-filter: blur(45px) saturate(180%) !important;
   border-radius: 16px !important;
-  box-shadow:
+  box-shadow: 
     0 20px 40px rgba(0, 0, 0, 0.4),
     0 0 0 1px rgba(215, 68, 68, 0.05),
     inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
@@ -427,17 +413,17 @@ body {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg,
-      transparent,
-      rgba(215, 68, 68, 0.3),
-      transparent);
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(215, 68, 68, 0.3), 
+    transparent);
   z-index: 1;
 }
 
 /* Efeito de hover sutil no card */
 .card-login:hover {
   transform: translateY(-2px);
-  box-shadow:
+  box-shadow: 
     0 25px 50px rgba(0, 0, 0, 0.5),
     0 0 0 1px rgba(215, 68, 68, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
@@ -450,7 +436,7 @@ body {
   z-index: 2;
 }
 
-.field input:focus~.icone-input {
+.field input:focus ~ .icone-input {
   color: var(--color-red-dark) !important;
   transform: translateY(-50%) scale(1.1) !important;
 }
@@ -481,12 +467,14 @@ body {
 /* Linha underline melhorada */
 .input-underline {
   height: 2px !important;
-  background: linear-gradient(90deg,
-      var(--color-red-dark),
-      var(--color-red-light)) !important;
+  background: linear-gradient(90deg, 
+    var(--color-red-dark), 
+    var(--color-red-light)) !important;
   box-shadow: 0 0 8px rgba(97, 1, 1, 0.3);
   z-index: 1;
 }
+
+
 
 
 /* 5. MELHORIAS NO "ESQUECI MINHA SENHA" */
@@ -568,12 +556,12 @@ body {
     padding: 2.5rem 2rem !important;
     border-radius: 14px !important;
   }
-
+  
   .create-account-btn {
     padding: 11px 20px;
     font-size: 0.9rem;
   }
-
+  
   .login-title {
     font-size: 2.4rem !important;
     letter-spacing: 3px !important;
@@ -586,12 +574,12 @@ body {
     padding: 2rem 1.5rem !important;
     border-radius: 12px !important;
   }
-
+  
   .create-account-btn {
     padding: 10px 18px;
     font-size: 0.85rem;
   }
-
+  
   .login-title {
     font-size: 2rem !important;
     letter-spacing: 2px !important;
@@ -605,7 +593,6 @@ body {
     opacity: 0;
     transform: translateY(20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -642,7 +629,6 @@ body {
 
 /* 10. MELHORIAS DE ACESSIBILIDADE */
 @media (prefers-reduced-motion: reduce) {
-
   .card-login,
   .field,
   .forgot-password,
@@ -661,105 +647,103 @@ body {
   /* O botão permanece 100% intocado */
   /* Nenhuma propriedade é alterada aqui */
 }
-
 /* ============================================
    FORMULÁRIO - INPUTS MINIMALISTAS
    ============================================ */
 /* ÍCONES DENTRO DO INPUT */
 .input-container {
-  position: relative;
-  width: 100%;
+    position: relative;
+    width: 100%;
 }
 
 .input-com-icone {
-  width: 100%;
-  padding-left: 45px !important;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  border: none;
-  background: transparent;
-  font-size: 16px;
+    width: 100%;
+    padding-left: 45px !important;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border: none;
+    background: transparent;
+    font-size: 16px;
 }
 
 .icone-input {
-  position: absolute;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #777;
-  font-size: 18px;
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+    font-size: 18px;
 }
 
 .login-form {
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
 }
 
 .field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;
 
 }
 
 
 .field label {
-  display: none;
+    display: none;
 }
 
 /* INPUTS COM LINHA INFERIOR */
 .field input[type="email"],
 .field input[type="password"] {
-  width: 100%;
-  height: var(--input-height);
-  padding: 0.75rem 0;
-  border-radius: var(--border-radius-input);
-  border: none;
-  border-bottom: 1px solid var(--color-gray-very-light);
-  background: transparent;
-  color: #fff6f6;
-  font-size: 1rem;
-  font-weight: 300;
-  outline: none;
-  transition: all 0.3s ease;
-  font-family: inherit;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+    width: 100%;
+    height: var(--input-height);
+    padding: 0.75rem 0;
+    border-radius: var(--border-radius-input);
+    border: none;
+    border-bottom: 1px solid var(--color-gray-very-light);
+    background: transparent;
+    color: #fff6f6;
+    font-size: 1rem;
+    font-weight: 300;
+    outline: none;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 }
 
 .field input::placeholder {
-  color: var(--color-white);
-  font-weight: 300;
-  opacity: 0.8;
+    color: var(--color-white);
+    font-weight: 300;
+    opacity: 0.8;
 }
 
 .field input:focus {
-  border-bottom-color: var(--color-red-jp);
-  background: transparent;
-  box-shadow: none;
+    border-bottom-color: var(--color-red-jp);
+    background: transparent;
+    box-shadow: none;
 }
 
 .field input:hover {
-  border-bottom-color: var(--color-red-light);
+    border-bottom-color: var(--color-red-light);
 }
 
 /* LINHA ANIMADA DEBAIXO DO INPUT */
 .input-underline {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 2px;
-  width: 0;
-  background: var(--color-red-dark);
-  transition: width 0.7s ease;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background: var(--color-red-dark);
+    transition: width 0.7s ease;
 }
 
 .field input:focus~.input-underline {
-  width: 100%;
+    width: 100%;
 }
-
 /* ============================================
    REMOVER COR DE FUNDO AUTOMÁTICA DO AUTOFILL
    ============================================ */
@@ -769,91 +753,90 @@ body {
 .field input:-webkit-autofill:hover,
 .field input:-webkit-autofill:focus,
 .field input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 1000px rgba(41, 1, 1, 0.11) inset !important;
-  box-shadow: 0 0 0 1000px rgba(41, 1, 1, 0.11) inset !important;
-  -webkit-text-fill-color: #ffffff !important;
-  border-bottom: 1px solid var(--color-red-dark) !important;
-  background-color: transparent !important;
-  transition: background-color 5000s ease-in-out 0s;
+    -webkit-box-shadow: 0 0 0 1000px rgba(41, 1, 1, 0.11) inset !important;
+    box-shadow: 0 0 0 1000px rgba(41, 1, 1, 0.11) inset !important;
+    -webkit-text-fill-color: #ffffff !important;
+    border-bottom: 1px solid var(--color-red-dark) !important;
+    background-color: transparent !important;
+    transition: background-color 5000s ease-in-out 0s;
 }
-
 /* ============================================
    LINK "FORGOT PASSWORD?"
    ============================================ */
 
 .forgot-password {
-  text-align: right;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
+    text-align: right;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .forgot-password a {
-  color: var(--color-gray-medium);
-  font-size: 0.9rem;
-  text-decoration: none;
-  font-weight: 300;
-  transition: all 0.3s ease;
+    color: var(--color-gray-medium);
+    font-size: 0.9rem;
+    text-decoration: none;
+    font-weight: 300;
+    transition: all 0.3s ease;
 }
 
 .forgot-password a:hover {
-  color: var(--color-red-jp);
+    color: var(--color-red-jp);
 }
 
 /* BOTÃO LOGIN */
 .btn-login {
-  margin-top: 1.3rem;
-  width: 100%;
-  padding: 0.95rem 0;
-  border-radius: 999px;
-  border: none;
-  background: linear-gradient(90deg,
-      #490009 0%,
-      var(--color-red-dark) 40%,
-      var(--color-red-dark) 100%);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.9);
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 700;
-  font-size: 0.9rem;
-  position: relative;
-  overflow: hidden;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    filter 0.2s ease;
+    margin-top: 1.3rem;
+    width: 100%;
+    padding: 0.95rem 0;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(90deg,
+            #490009 0%,
+            var(--color-red-dark) 40%,
+            var(--color-red-dark) 100%);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.9);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    font-size: 0.9rem;
+    position: relative;
+    overflow: hidden;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
 }
 
 .btn-login a {
-  color: #220c0c;
-  text-decoration: none;
-  display: block;
+    color: #220c0c;
+    text-decoration: none;
+    display: block;
 }
 
 .btn-login::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(120deg,
-      rgba(51, 2, 2, 0.575),
-      transparent 60%);
-  mix-blend-mode: screen;
-  opacity: 0;
-  transform: translateX(-40%);
-  transition:
-    opacity 0.35s ease,
-    transform 0.35s ease;
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg,
+            rgba(51, 2, 2, 0.575),
+            transparent 60%);
+    mix-blend-mode: screen;
+    opacity: 0;
+    transform: translateX(-40%);
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
 }
 
 .btn-login:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 20px 40px rgba(77, 1, 1, 0.61);
-  filter: brightness(1.03);
+    transform: translateY(-1px);
+    box-shadow: 0 20px 40px rgba(77, 1, 1, 0.61);
+    filter: brightness(1.03);
 }
 
 .btn-login:hover::after {
-  opacity: 1;
-  transform: translateX(0%);
+    opacity: 1;
+    transform: translateX(0%);
 }
 
 /* ============================================
@@ -861,495 +844,147 @@ body {
    ============================================ */
 
 .switch-link {
-  margin-top: 2.5rem;
-  font-size: 1rem;
-  color: #ffffff !important;
-  text-align: center;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
+    margin-top: 2.5rem;
+    font-size: 1rem;
+    color: #ffffff !important;
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .switch-link a {
-  color: var(--color-gray-medium) !important;
-  text-decoration: none;
-  font-weight: 400;
-  transition: all 0.3s ease;
+    color: var(--color-gray-medium) !important;
+    text-decoration: none;
+    font-weight: 400;
+    transition: all 0.3s ease;
 }
 
 .switch-link a:hover {
-  color: var(--color-red-jp) !important;
-  text-decoration: underline;
+    color: var(--color-red-jp) !important;
+    text-decoration: underline;
 }
 
 /* ADICIONAR LINK "SIGN UP" CENTRALIZADO */
 .signup-link {
-  display: block;
-  text-align: center;
-  margin-top: 1.5rem;
-  font-size: 0.9rem;
-  color: var(--color-black);
-  text-decoration: none;
-  font-weight: 300;
+    display: block;
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--color-black);
+    text-decoration: none;
+    font-weight: 300;
 }
 
 .signup-link:hover {
-  color: var(--color-red-jp);
+    color: var(--color-red-jp);
+}
+
+
+ /* ============================================
+   RESPONSIVIDADE MOBILE APENAS (Android & iPhone)
+   ============================================ */
+
+/* APENAS PARA DISPOSITIVOS COM ATÉ 768px DE LARGURA */
+@media screen and (max-width: 768px) {
+  /* MANTÉM A ESTRUTURA DO GRID MAS OCULTA A LOGO */
+  .login-layout-split {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: 0fr 1fr !important;
+  }
+  
+  /* OCULTA A SEÇÃO DA LOGO COMPLETAMENTE */
+  .left-scanner-section {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  /* FORMULÁRIO OCUPA TODA A TELA */
+  .right-login-content {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    padding: 1rem !important;
+   
+  }
+  
+  /* CARD RESPONSIVO */
+  .card-login {
+    width: 95% !important;
+    max-width: 95% !important;
+    margin: 0 auto !important;
+  }
+}
+
+/* MOBILE PEQUENO (até 480px) */
+@media screen and (max-width: 480px) {
+  .card-login {
+    padding: 2rem 1.5rem !important;
+    width: 98% !important;
+  }
+  
+  .login-title {
+    font-size: 1.8rem !important;
+  }
+}
+
+/* MOBILE MUITO PEQUENO (até 360px) */
+@media screen and (max-width: 360px) {
+  .card-login {
+    padding: 1.75rem 1.25rem !important;
+  }
+  
+  .login-title {
+    font-size: 1.6rem !important;
+  }
+}
+
+/* LANDSCAPE (orientação horizontal) */
+@media screen and (max-height: 600px) and (orientation: landscape) and (max-width: 768px) {
+  .card-login {
+    padding: 1.5rem !important;
+    margin: 0.5rem auto !important;
+  }
 }
 
 /* ============================================
-   RESPONSIVIDADE CORRIGIDA
+   CORREÇÕES ESPECÍFICAS PARA iOS SAFARI
    ============================================ */
-/* PARA QUEM TEM PROBLEMA DE ANIMAÇÃO (ACESSIBILIDADE) */
-@media (prefers-reduced-motion: reduce) {
-  .text-shimmer {
-    animation: none !important;
-    background-size: 100% 100% !important;
-    background-position: 0 0 !important;
+@supports (-webkit-touch-callout: none) {
+  /* CORREÇÃO DE ALTURA NO SAFARI iOS */
+  @media screen and (max-width: 768px) {
+    .auth-page,
+    .right-login-content {
+      height: -webkit-fill-available !important;
+      min-height: -webkit-fill-available !important;
+    }
   }
-
-  .btn-shimmer::before {
-    animation: none !important;
-    display: none !important;
-  }
-}
-
-/* RESPONSIVIDADE */
-@media (max-width: 768px) {
-  .login-title::before {
-    /* Simplificar animações em mobile para performance */
-    animation-duration: 12s !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .login-title {
-    font-size: 1.6rem;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .login-title::before {
-      animation: none !important;
-      background: linear-gradient(135deg, #330000, #1a0000) !important;
+  
+  /* PREVENIR ZOOM EM INPUTS */
+  @media screen and (max-width: 768px) {
+    input[type="email"],
+    input[type="password"] {
+      font-size: 16px !important;
     }
   }
 }
 
-/* TABLET (768px - 1024px) */
-@media (max-width: 1024px) {
-  .login-layout-split {
-    grid-template-columns: 40% 60%;
-    height: auto;
-    min-height: 100vh;
-  }
-
-  .left-scanner-section {
-    height: 100vh;
-  }
-
-  .right-login-content {
-    height: 100vh;
-    padding: 1.5rem;
-  }
-
-  .card-login {
-    padding: 2.5rem 2rem;
-    max-width: 320px;
-  }
-
-  .login-title {
-    font-size: 2.2rem;
-    margin-bottom: 2rem;
-    letter-spacing: 2px;
-  }
-
-  .final-logo-position {
-    width: 200px !important;
-  }
-
-  .floating-shadow {
-    width: 20rem;
-    bottom: 25%;
-  }
-}
-
-/* TABLET PEQUENO / LARGE PHONE (600px - 768px) */
-@media (max-width: 768px) {
-  .login-layout-split {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-    height: auto;
-    min-height: 100vh;
-  }
-
-  .left-scanner-section {
-    order: 2;
-    height: 40vh;
-    min-height: 300px;
-    padding: 2rem;
-  }
-
-  .right-login-content {
-    order: 1;
-    height: 60vh;
-    min-height: 500px;
-    padding: 1.5rem 1rem;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding-top: 3rem;
-  }
-
-  .card-login {
-    padding: 2.5rem 1.5rem;
-    max-width: 100%;
-    margin: 0 auto;
-
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
-  }
-
-  .login-title {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    letter-spacing: 1.5px;
-  }
-
-  .login-form {
-    gap: 2rem;
-  }
-
-  .final-logo-position {
-    width: 160px !important;
-  }
-
-  .floating-shadow {
-    width: 15rem;
-    bottom: 20%;
-  }
-
-  .field input[type="email"],
-  .field input[type="password"] {
-    height: 46px;
-    font-size: 0.95rem;
-  }
-
-  .btn-login {
-    height: 48px;
-    font-size: 0.95rem;
-  }
-}
-
-/* MOBILE PEQUENO (480px - 600px) */
-@media (max-width: 600px) {
-  .auth-page {
-    overflow-y: auto;
-  }
-
-  .right-login-content {
-    height: auto;
-    min-height: 55vh;
-    padding: 1rem;
-    padding-top: 2rem;
-    align-items: center;
-  }
-
-  .left-scanner-section {
-    height: 45vh;
-    min-height: 250px;
-    padding: 1.5rem;
-  }
-
-  .card-login {
-    padding: 2rem 1.25rem;
-    border-radius: 10px !important;
-  }
-
-  .login-title {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    letter-spacing: 1px;
-  }
-
-  .login-form {
-    gap: 1.8rem;
-  }
-
-  .field input[type="email"],
-  .field input[type="password"] {
-    height: 44px;
-    font-size: 0.9rem;
-    padding: 0.5rem 0;
-  }
-
-  .forgot-password a {
-    font-size: 0.9rem;
-  }
-
-  .btn-login {
-    height: 46px;
-    font-size: 0.9rem;
-    margin-top: 1.5rem;
-  }
-
-  .switch-link {
-    margin-top: 2rem;
-    font-size: 0.85rem;
-    padding-top: 1.25rem;
-  }
-
-  .signup-link {
-    font-size: 0.85rem;
-    margin-top: 1.25rem;
-  }
-
-  .final-logo-position {
-    width: 140px !important;
-  }
-
-  .floating-shadow {
-    width: 12rem;
-    bottom: 25%;
-  }
-}
-
-/* MOBILE MUITO PEQUENO (até 480px) */
-@media (max-width: 480px) {
-  .right-login-content {
-    padding: 0.75rem;
-    padding-top: 1.5rem;
-    min-height: 60vh;
-  }
-
-  .left-scanner-section {
-    min-height: 40vh;
-    padding: 1rem;
-  }
-
-  .card-login {
-    padding: 1.75rem 1rem;
-    border-radius: 8px !important;
-  }
-
-  .login-title {
-    font-size: 1.6rem;
-    margin-bottom: 1.25rem;
-    letter-spacing: 0.5px;
-  }
-
-  .login-form {
-    gap: 1.5rem;
-  }
-
-  .field input[type="email"],
-  .field input[type="password"] {
-    height: 42px;
-    font-size: 0.85rem;
-  }
-
-  .forgot-password {
-    margin-top: 0.75rem;
-    margin-bottom: 0.25rem;
-  }
-
-  .forgot-password a {
-    font-size: 0.75rem;
-  }
-
-  .btn-login {
-    height: 44px;
-    font-size: 0.85rem;
-    margin-top: 1.25rem;
-  }
-
-  .switch-link {
-    margin-top: 1.75rem;
-    font-size: 0.8rem;
-    padding-top: 1rem;
-  }
-
-  .signup-link {
-    font-size: 0.8rem;
-    margin-top: 1rem;
-  }
-
-  .final-logo-position {
-    width: 120px !important;
-  }
-
-  .floating-shadow {
-    width: 10rem;
-    bottom: 30%;
-  }
-}
-
-/* ORIENTAÇÃO LANDSCAPE EM MOBILE */
-@media (max-height: 600px) and (orientation: landscape) {
-  .login-layout-split {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-  }
-
-  .left-scanner-section {
-    height: 100vh;
-    order: 2;
-  }
-
-  .right-login-content {
-    height: 100vh;
-    order: 1;
-    padding: 1rem;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .card-login {
-    padding: 1.5rem;
-    max-width: 90%;
-  }
-
-  .login-title {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .login-form {
-    gap: 1rem;
-  }
-
-  .field input[type="email"],
-  .field input[type="password"] {
-    height: 40px;
-    padding: 0.25rem 0;
-  }
-
-  .btn-login {
-    height: 40px;
-    margin-top: 1rem;
-  }
-
-  .final-logo-position {
-    width: 100px !important;
-  }
-
-  .floating-shadow {
-    display: none;
-  }
-}
-
 /* ============================================
-   ESTILOS PARA MENSAGENS DE FEEDBACK
+   SAFE AREAS PARA iPHONES COM NOTCH
    ============================================ */
-
-#login-message {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 12px 24px;
-  border-radius: 8px;
-  color: white;
-  font-weight: 600;
-  z-index: 9999;
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: all 0.3s ease;
-  max-width: 400px;
-  text-align: center;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid;
-  background: rgba(15, 15, 15, 0.95);
-}
-
-#login-message.success {
-  border-color: rgba(0, 200, 83, 0.3);
-  box-shadow: 0 0 20px rgba(0, 200, 83, 0.2);
-}
-
-#login-message.error {
-  border-color: rgba(215, 68, 68, 0.3);
-  box-shadow: 0 0 20px rgba(215, 68, 68, 0.2);
-}
-
-/* RESPONSIVIDADE DAS MENSAGENS */
-@media (max-width: 768px) {
-  #login-message {
-    top: 10px;
-    right: 10px;
-    left: 10px;
-    max-width: calc(100% - 20px);
-    padding: 10px 16px;
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 480px) {
-  #login-message {
-    top: 5px;
-    right: 5px;
-    left: 5px;
-    max-width: calc(100% - 10px);
-    padding: 8px 12px;
-    font-size: 0.85rem;
-  }
-}
-
-/* ANIMAÇÃO DE ENTRADA SUAVE */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.card-login {
-  animation: fadeInUp 0.8s ease-out;
-}
-
-.final-logo-position {
-  animation: fadeInUp 0.8s ease-out 0.2s both;
-}
-
-/* PREVENIR ZOOM EM INPUTS NO iOS */
-@media (max-width: 768px) {
-
-  input,
-  select,
-  textarea {
-    font-size: 16px !important;
-    /* Previne zoom automático no iOS */
-  }
-}
-
-/* MELHORIAS DE TOUCH PARA MOBILE */
-@media (max-width: 768px) {
-
-  .btn-login,
-  .forgot-password a,
-  .switch-link a,
-  .signup-link {
-    min-height: 44px;
-    /* Tamanho mínimo para toque */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .field input[type="email"],
-  .field input[type="password"] {
-    touch-action: manipulation;
-    /* Melhora experiência touch */
-  }
-}
-
-/* CORREÇÃO PARA DISPOSITIVOS COM NOTCH */
-@media (max-width: 768px) {
-  .auth-page {
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
+@supports (padding: max(0px)) {
+  @media screen and (max-width: 768px) {
+    .right-login-content {
+      padding-left: max(1rem, env(safe-area-inset-left)) !important;
+      padding-right: max(1rem, env(safe-area-inset-right)) !important;
+      padding-top: max(1rem, env(safe-area-inset-top)) !important;
+      padding-bottom: max(1rem, env(safe-area-inset-bottom)) !important;
+    }
   }
 }

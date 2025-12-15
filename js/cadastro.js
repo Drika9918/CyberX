@@ -58,7 +58,7 @@ function showSuccessPopup(username, email) {
                     border-radius: 8px;
                     margin: 20px 0;
                     border: 1px solid rgba(74, 144, 226, 0.3);
-                    color: #680505ff;
+                    color:#2E6F40;
                     word-break: break-all;
                     font-size: 14px;
                 ">
@@ -368,4 +368,5 @@ setTimeout(() => {
         showMessage('Usando modo de teste. Recarregue para modo real.', 'warning');
     }
 }, 10000);
+
 
